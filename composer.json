@@ -1,0 +1,20 @@
+{
+  "name": "benkle/feed-parser",
+  "description": "Rule-based rss and atom parser",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Benjamin Kleiner",
+      "email": "bizzl@users.sourceforge.net"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Benkle\\FeedParser\\": "src"
+    }
+  },
+  "require": {
+    "guzzlehttp/guzzle": "^6.2"
+  }
+}
