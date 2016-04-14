@@ -37,7 +37,9 @@ class PHPDOMParser implements DOMParserInterface
     public function parse($source)
     {
         $dom = new \DOMDocument();
-        $dom->loadHTML($source);
+        if (!$dom->loadXML($source)) {
+            throw new \DOMException('Unable to parse source');
+        }
         return $dom;
     }
 }
