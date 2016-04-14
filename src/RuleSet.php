@@ -74,6 +74,6 @@ class RuleSet
             uasort($this->rules, function($a, $b) { return $a['priority'] - $b['priority']; });
             $this->sorted = true;
         }
-        return array_map(function($rule) { return $rule['rule']; }, $this->rules);
+        return array_values(array_map(function($rule) { return $rule['rule']; }, $this->rules));
     }
 }
