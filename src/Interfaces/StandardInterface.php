@@ -19,6 +19,7 @@
 namespace Benkle\FeedParser\Interfaces;
 
 
+use Benkle\FeedParser\Parser;
 use Benkle\FeedParser\RuleSet;
 
 interface StandardInterface
@@ -40,4 +41,10 @@ interface StandardInterface
      * @return \DOMNode
      */
     public function getRootNode(\DOMDocument $dom);
+
+    /**
+     * Get a parser for this standard.
+     * @return Parser
+     */
+    public function getParser();
 }
