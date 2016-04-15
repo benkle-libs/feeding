@@ -24,12 +24,11 @@ interface RuleInterface
 {
     /**
      * Check if a dom node can be handled by this rule.
-     * @param Parser $parser
      * @param \DOMNode $node
      * @param NodeInterface $target
      * @return bool
      */
-    public function canHandle(Parser $parser, \DOMNode $node, NodeInterface $target);
+    public function canHandle(\DOMNode $node, NodeInterface $target);
 
     /**
      * Handle a dom node.
