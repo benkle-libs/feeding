@@ -20,7 +20,7 @@ namespace Benkle\FeedParser\Interfaces;
 
 
 use Benkle\FeedParser\Parser;
-use Benkle\FeedParser\RuleSet;
+use Benkle\FeedParser\Utilities\PriorityList;
 
 /**
  * Interface StandardInterface
@@ -31,9 +31,9 @@ interface StandardInterface
 {
     /**
      * Get the standards rule set.
-     * @return RuleSet
+     * @return PriorityList
      */
-    public function getRuleSet();
+    public function getRules();
 
     /**
      * Get a new feed object.
