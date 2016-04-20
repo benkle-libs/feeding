@@ -22,6 +22,11 @@ namespace Benkle\FeedParser\Interfaces;
 use Benkle\FeedParser\Parser;
 use Benkle\FeedParser\RuleSet;
 
+/**
+ * Interface StandardInterface
+ * A Standard is a combination of rule set, feed class factory and feed identification.
+ * @package Benkle\FeedParser\Interfaces
+ */
 interface StandardInterface
 {
     /**
@@ -47,4 +52,11 @@ interface StandardInterface
      * @return Parser
      */
     public function getParser();
+
+    /**
+     * Check if a dom document is a feed this standard handles.
+     * @param \DOMDocument $dom
+     * @return bool
+     */
+    public function canHandle(\DOMDocument $dom);
 }
