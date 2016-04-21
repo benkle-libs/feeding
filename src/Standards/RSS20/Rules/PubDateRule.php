@@ -19,18 +19,17 @@
 namespace Benkle\FeedParser\Standards\RSS20\Rules;
 
 
-use Benkle\FeedParser\Interfaces\ChannelInterface;
+use Benkle\FeedParser\Interfaces\ItemInterface;
 use Benkle\FeedParser\Interfaces\NodeInterface;
 use Benkle\FeedParser\Interfaces\RuleInterface;
 use Benkle\FeedParser\Parser;
 
 /**
- * Class LinkRule
- * Parse the RSS link tag.
- * This one can be nasty depending on the dom parser used.
+ * Class PubDateRule
+ * Parse item publication dates.
  * @package Benkle\FeedParser\Standards\RSS20\Rules
  */
-class LinkRule implements RuleInterface
+class PubDateRule implements RuleInterface
 {
 
     /**
@@ -41,7 +40,7 @@ class LinkRule implements RuleInterface
      */
     public function canHandle(\DOMNode $node, NodeInterface $target)
     {
-        return strtolower($node->nodeName) =='link' && $target instanceof ChannelInterface;
+        return strtolower($node->nodeName) =='pubdate' && $target instanceof ItemInterface;
     }
 
     /**
@@ -53,11 +52,7 @@ class LinkRule implements RuleInterface
      */
     public function handle(Parser $parser, \DOMNode $node, NodeInterface $target)
     {
-        $value = $node->nodeValue;
-        if (!$value) {
-            $value = $node->nextSibling->nodeType == 3 ? trim($node->nextSibling->nodeValue) : '';
-        }
-        /** @var ChannelInterface $target */
-        $target->setLink(trim($value));
+        /** @var ItemInterface $target */
+        $target->setLastModified(\DateTime::createFromFormat(\DateTime::RSS, $node->nodeValue));
     }
 }

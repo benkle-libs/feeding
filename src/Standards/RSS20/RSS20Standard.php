@@ -24,7 +24,9 @@ use Benkle\FeedParser\Interfaces\FeedInterface;
 use Benkle\FeedParser\Interfaces\StandardInterface;
 use Benkle\FeedParser\Standards\RSS20\Rules\ChannelRule;
 use Benkle\FeedParser\Standards\RSS20\Rules\ItemRule;
+use Benkle\FeedParser\Standards\RSS20\Rules\LastBuildDateRule;
 use Benkle\FeedParser\Standards\RSS20\Rules\LinkRule;
+use Benkle\FeedParser\Standards\RSS20\Rules\PubDateRule;
 use Benkle\FeedParser\Standards\RSS20\Rules\SimpleRSSFieldRule;
 use Benkle\FeedParser\Traits\WithParserTrait;
 use Benkle\FeedParser\Traits\WithRuleSetTrait;
@@ -48,9 +50,12 @@ class RSS20Standard implements StandardInterface
              ->add(new ChannelRule(), 0)
              ->add(new SimpleRSSFieldRule('title', 'setTitle'), 25)
              ->add(new LinkRule(), 10)
+             ->add(new LastBuildDateRule(), 10)
              ->add(new SimpleRSSFieldRule('description', 'setDescription'), 25)
              ->add(new SimpleRSSFieldRule('guid', 'setPublicId'), 25)
-             ->add(new ItemRule(), 50);
+             ->add(new ItemRule(), 50)
+             ->add(new PubDateRule(), 50)
+        ;
     }
 
     /**
