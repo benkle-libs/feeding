@@ -1,42 +1,43 @@
 <?php
 /**
  * Copyright (c) 2016 Benjamin Kleiner
- *  
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
  * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
  * permit persons to whom the Software is furnished to do so, subject to the following conditions:
- *  
+ *
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of
  * the Software.
- *  
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
  * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS
  * OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\FeedParser\Traits;
+namespace Benkle\FeedParser\Interfaces;
 
-
-use Benkle\FeedParser\Parser;
-
-trait WithParserTrait
+/**
+ * Interface FileAccessInterface
+ * This interfaces allows us to abstract away file access just a wee bit.
+ * @package Benkle\FeedParser\Interfaces
+ */
+interface FileAccessInterface
 {
 
-    /** @var  Parser */
-    private $parser;
-    
     /**
-     * Get a parser for this standard.
-     * @return Parser
+     * Check wether a file exists.
+     * @param string $filename
+     * @return bool
      */
-    public function getParser()
-    {
-        if (!isset($this->parser)) {
-            $this->parser = new Parser($this);
-        }
-        return $this->parser;
-    }
-    
+    public function exists($filename);
+
+    /**
+     * Get the file content.
+     * @param string $filename
+     * @return string
+     */
+    public function get($filename);
+
 }
