@@ -16,23 +16,39 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\FeedParser\Standards\Atom10\Rules;
+namespace Benkle\FeedParser\Standards\Atom\Rules;
 
 
-use Benkle\FeedParser\FeedItem;
-use Benkle\FeedParser\Interfaces\FeedInterface;
+use Benkle\FeedParser\Interfaces\ChannelInterface;
 use Benkle\FeedParser\Interfaces\NodeInterface;
 use Benkle\FeedParser\Interfaces\RuleInterface;
 use Benkle\FeedParser\Parser;
-use Benkle\FeedParser\Standards\Atom10\Atom10Standard;
+use Benkle\FeedParser\Standards\Atom\Atom10Standard;
 
 /**
- * Class EntryRule
- * Parse an Atom entry.
- * @package Benkle\FeedParser\Standards\Atom10\Rules
+ * Class SimpleAtomFieldRule
+ * A simple catch-any for all of those simpler Atom elements.
+ * @package Benkle\FeedParser\Standards\Atom\Rules
  */
-class EntryRule implements RuleInterface
+class SimpleAtomFieldRule implements RuleInterface
 {
+
+    /** @var string  */
+    private $nodeName = '';
+
+    /** @var string  */
+    private $setterName = '';
+
+    /**
+     * SimpleAtomFieldRule constructor.
+     * @param string $nodeName
+     * @param string $setterName
+     */
+    public function __construct($nodeName, $setterName)
+    {
+        $this->nodeName = strtolower($nodeName);
+        $this->setterName = $setterName;
+    }
 
     /**
      * Check if a dom node can be handled by this rule.
@@ -43,9 +59,9 @@ class EntryRule implements RuleInterface
     public function canHandle(\DOMNode $node, NodeInterface $target)
     {
         return
-            strtolower($node->localName) == 'entry' &&
+            strtolower($node->localName) == $this->nodeName &&
             $node->namespaceURI == Atom10Standard::NAMESPACE_URI &&
-            $target instanceof FeedInterface;
+            $target instanceof ChannelInterface;
     }
 
     /**
@@ -57,9 +73,25 @@ class EntryRule implements RuleInterface
      */
     public function handle(Parser $parser, \DOMNode $node, NodeInterface $target)
     {
-        $item = new FeedItem();
-        $parser->parseNodeChildren($node, $item);
-        /** @var FeedInterface $target */
-        $target->addItem($item);
+        $target->{$this->setterName}($this->getNodeContent($node));
+    }
+
+    /**
+     * Enable XHTML types.
+     * @param \DOMNode $node
+     * @return string
+     */
+    private function getNodeContent(\DOMNode $node)
+    {
+        $type = $node->attributes->getNamedItem('type');
+        if ($type && strtolower($type->nodeValue) == 'xhtml') {
+            $result = '';
+            foreach ($node->childNodes as $childNode) {
+                $result .= $node->ownerDocument->save($childNode);
+            }
+            return $result;
+        } else {
+            return $node->nodeValue;
+        }
     }
 }

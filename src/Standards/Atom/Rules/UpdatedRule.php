@@ -16,19 +16,19 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\FeedParser\Standards\Atom10\Rules;
+namespace Benkle\FeedParser\Standards\Atom\Rules;
 
 
 use Benkle\FeedParser\Interfaces\ChannelInterface;
 use Benkle\FeedParser\Interfaces\NodeInterface;
 use Benkle\FeedParser\Interfaces\RuleInterface;
 use Benkle\FeedParser\Parser;
-use Benkle\FeedParser\Standards\Atom10\Atom10Standard;
+use Benkle\FeedParser\Standards\Atom\Atom10Standard;
 
 /**
  * Class UpdatedRule
  * Parse Atom timestamps.
- * @package Benkle\FeedParser\Standards\Atom10\Rules
+ * @package Benkle\FeedParser\Standards\Atom\Rules
  */
 class UpdatedRule implements RuleInterface
 {

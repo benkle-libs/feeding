@@ -24,7 +24,7 @@ use Benkle\FeedParser\DOMParsers\MastermindsHTML5Parser;
 use Benkle\FeedParser\DOMParsers\PHPDOMParser;
 use Benkle\FeedParser\FileAccess\BasicFileAccess;
 use Benkle\FeedParser\Interfaces\FileAccessInterface;
-use Benkle\FeedParser\Standards\Atom10\Atom10Standard;
+use Benkle\FeedParser\Standards\Atom\Atom10Standard;
 use Benkle\FeedParser\Standards\RSS\RSS09Standard;
 use Benkle\FeedParser\Standards\RSS\RSS20Standard;
 use GuzzleHttp\Client;

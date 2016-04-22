@@ -16,38 +16,23 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\FeedParser\Standards\Atom10\Rules;
+namespace Benkle\FeedParser\Standards\Atom\Rules;
 
 
+use Benkle\FeedParser\FeedItem;
+use Benkle\FeedParser\Interfaces\FeedInterface;
 use Benkle\FeedParser\Interfaces\NodeInterface;
 use Benkle\FeedParser\Interfaces\RuleInterface;
 use Benkle\FeedParser\Parser;
-use Benkle\FeedParser\Standards\Atom10\Atom10Standard;
+use Benkle\FeedParser\Standards\Atom\Atom10Standard;
 
 /**
- * Class SingleLinkRule
- * Tag a specific relation link and feed it to a setter.
- * @package Benkle\FeedParser\Standards\Atom10\Rules
+ * Class EntryRule
+ * Parse an Atom entry.
+ * @package Benkle\FeedParser\Standards\Atom\Rules
  */
-class SingleLinkRule implements RuleInterface
+class EntryRule implements RuleInterface
 {
-
-    /** @var string  */
-    private $rel = '';
-
-    /** @var string  */
-    private $setterName = '';
-
-    /**
-     * SingleLinkRule constructor.
-     * @param string $rel
-     * @param string $setterName
-     */
-    public function __construct($rel, $setterName)
-    {
-        $this->rel = strtolower($rel);
-        $this->setterName = $setterName;
-    }
 
     /**
      * Check if a dom node can be handled by this rule.
@@ -58,9 +43,9 @@ class SingleLinkRule implements RuleInterface
     public function canHandle(\DOMNode $node, NodeInterface $target)
     {
         return
-            strtolower($node->localName) == 'link' &&
+            strtolower($node->localName) == 'entry' &&
             $node->namespaceURI == Atom10Standard::NAMESPACE_URI &&
-            strtolower($node->attributes->getNamedItem('rel')->nodeValue) == $this->rel;
+            $target instanceof FeedInterface;
     }
 
     /**
@@ -72,6 +57,9 @@ class SingleLinkRule implements RuleInterface
      */
     public function handle(Parser $parser, \DOMNode $node, NodeInterface $target)
     {
-        $target->{$this->setterName}($node->attributes->getNamedItem('href')->nodeValue);
+        $item = new FeedItem();
+        $parser->parseNodeChildren($node, $item);
+        /** @var FeedInterface $target */
+        $target->addItem($item);
     }
 }

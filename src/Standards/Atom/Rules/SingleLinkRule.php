@@ -16,37 +16,36 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\FeedParser\Standards\Atom10\Rules;
+namespace Benkle\FeedParser\Standards\Atom\Rules;
 
 
-use Benkle\FeedParser\Interfaces\ChannelInterface;
 use Benkle\FeedParser\Interfaces\NodeInterface;
 use Benkle\FeedParser\Interfaces\RuleInterface;
 use Benkle\FeedParser\Parser;
-use Benkle\FeedParser\Standards\Atom10\Atom10Standard;
+use Benkle\FeedParser\Standards\Atom\Atom10Standard;
 
 /**
- * Class SimpleAtomFieldRule
- * A simple catch-any for all of those simpler Atom elements.
- * @package Benkle\FeedParser\Standards\Atom10\Rules
+ * Class SingleLinkRule
+ * Tag a specific relation link and feed it to a setter.
+ * @package Benkle\FeedParser\Standards\Atom\Rules
  */
-class SimpleAtomFieldRule implements RuleInterface
+class SingleLinkRule implements RuleInterface
 {
 
     /** @var string  */
-    private $nodeName = '';
+    private $rel = '';
 
     /** @var string  */
     private $setterName = '';
 
     /**
-     * SimpleAtomFieldRule constructor.
-     * @param string $nodeName
+     * SingleLinkRule constructor.
+     * @param string $rel
      * @param string $setterName
      */
-    public function __construct($nodeName, $setterName)
+    public function __construct($rel, $setterName)
     {
-        $this->nodeName = strtolower($nodeName);
+        $this->rel = strtolower($rel);
         $this->setterName = $setterName;
     }
 
@@ -59,9 +58,9 @@ class SimpleAtomFieldRule implements RuleInterface
     public function canHandle(\DOMNode $node, NodeInterface $target)
     {
         return
-            strtolower($node->localName) == $this->nodeName &&
+            strtolower($node->localName) == 'link' &&
             $node->namespaceURI == Atom10Standard::NAMESPACE_URI &&
-            $target instanceof ChannelInterface;
+            strtolower($node->attributes->getNamedItem('rel')->nodeValue) == $this->rel;
     }
 
     /**
@@ -73,25 +72,6 @@ class SimpleAtomFieldRule implements RuleInterface
      */
     public function handle(Parser $parser, \DOMNode $node, NodeInterface $target)
     {
-        $target->{$this->setterName}($this->getNodeContent($node));
-    }
-
-    /**
-     * Enable XHTML types.
-     * @param \DOMNode $node
-     * @return string
-     */
-    private function getNodeContent(\DOMNode $node)
-    {
-        $type = $node->attributes->getNamedItem('type');
-        if ($type && strtolower($type->nodeValue) == 'xhtml') {
-            $result = '';
-            foreach ($node->childNodes as $childNode) {
-                $result .= $node->ownerDocument->save($childNode);
-            }
-            return $result;
-        } else {
-            return $node->nodeValue;
-        }
+        $target->{$this->setterName}($node->attributes->getNamedItem('href')->nodeValue);
     }
 }
