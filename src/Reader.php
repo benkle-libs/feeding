@@ -26,6 +26,7 @@ use Benkle\FeedParser\FileAccess\BasicFileAccess;
 use Benkle\FeedParser\Interfaces\FileAccessInterface;
 use Benkle\FeedParser\Standards\Atom\Atom10Standard;
 use Benkle\FeedParser\Standards\RSS\RSS09Standard;
+use Benkle\FeedParser\Standards\RSS\RSS10Standard;
 use Benkle\FeedParser\Standards\RSS\RSS20Standard;
 use GuzzleHttp\Client;
 
@@ -59,6 +60,7 @@ class Reader extends BasicReader
             )
             ->getStandards()
                 ->add(new RSS09Standard())
+                ->add(new RSS10Standard())
                 ->add(new RSS20Standard())
                 ->add(new Atom10Standard())
         ;

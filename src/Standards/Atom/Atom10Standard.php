@@ -87,6 +87,6 @@ class Atom10Standard implements StandardInterface
      */
     public function canHandle(\DOMDocument $dom)
     {
-        return $dom->getElementsByTagNameNS('http://www.w3.org/2005/Atom', 'feed')->length == 1;
+        return $dom->getElementsByTagNameNS(self::NAMESPACE_URI, 'feed')->length == 1;
     }
 }
