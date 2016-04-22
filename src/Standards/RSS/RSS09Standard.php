@@ -16,33 +16,42 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\FeedParser\Standards\RSS20;
+namespace Benkle\FeedParser\Standards\RSS;
 
 
 use Benkle\FeedParser\Feed;
 use Benkle\FeedParser\Interfaces\FeedInterface;
 use Benkle\FeedParser\Interfaces\StandardInterface;
-use Benkle\FeedParser\Standards\RSS20\Rules\ChannelRule;
-use Benkle\FeedParser\Standards\RSS20\Rules\ItemRule;
-use Benkle\FeedParser\Standards\RSS20\Rules\LastBuildDateRule;
-use Benkle\FeedParser\Standards\RSS20\Rules\LinkRule;
-use Benkle\FeedParser\Standards\RSS20\Rules\PubDateRule;
-use Benkle\FeedParser\Standards\RSS20\Rules\SimpleRSSFieldRule;
+use Benkle\FeedParser\Standards\RSS\Rules\ChannelRule;
+use Benkle\FeedParser\Standards\RSS\Rules\ItemRule;
+use Benkle\FeedParser\Standards\RSS\Rules\LastBuildDateRule;
+use Benkle\FeedParser\Standards\RSS\Rules\LinkRule;
+use Benkle\FeedParser\Standards\RSS\Rules\PubDateRule;
+use Benkle\FeedParser\Standards\RSS\Rules\SimpleRSSFieldRule;
 use Benkle\FeedParser\Traits\WithParserTrait;
 use Benkle\FeedParser\Traits\WithRuleSetTrait;
 
 /**
- * Class RSS20Standard
- * Standard for handling RSS 2.0
- * @package Benkle\FeedParser\Standards\RSS20
+ * Class RSS09Standard
+ * Standard for handling RSS 0.9*
+ * @package Benkle\FeedParser\Standards\RSS
  */
-class RSS20Standard implements StandardInterface
+class RSS09Standard implements StandardInterface
 {
 
     use WithParserTrait, WithRuleSetTrait;
 
     /**
-     * RSS20Standard constructor.
+     * Get the pattern for matching RSS versions.
+     * @return string
+     */
+    protected function getVersionPattern()
+    {
+        return '0.9*';
+    }
+
+    /**
+     * RSS09Standard constructor.
      */
     public function __construct()
     {
@@ -52,10 +61,8 @@ class RSS20Standard implements StandardInterface
              ->add(new LinkRule(), 10)
              ->add(new LastBuildDateRule(), 10)
              ->add(new SimpleRSSFieldRule('description', 'setDescription'), 25)
-             ->add(new SimpleRSSFieldRule('guid', 'setPublicId'), 25)
              ->add(new ItemRule(), 50)
-             ->add(new PubDateRule(), 50)
-        ;
+             ->add(new PubDateRule(), 50);
     }
 
     /**
@@ -90,8 +97,9 @@ class RSS20Standard implements StandardInterface
         $result = false;
         $rootNodes = $dom->getElementsByTagName('rss');
         if ($rootNodes->length == 1) {
-            $result = $rootNodes->item(0)->attributes->getNamedItem('version')->nodeValue == '2.0';
+            $result = fnmatch($this->getVersionPattern(), $rootNodes->item(0)->attributes->getNamedItem('version')->nodeValue);
         }
         return $result;
     }
+
 }

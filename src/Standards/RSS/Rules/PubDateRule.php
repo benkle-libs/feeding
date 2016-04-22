@@ -16,20 +16,20 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\FeedParser\Standards\RSS20\Rules;
+namespace Benkle\FeedParser\Standards\RSS\Rules;
 
 
-use Benkle\FeedParser\Interfaces\FeedInterface;
+use Benkle\FeedParser\Interfaces\ItemInterface;
 use Benkle\FeedParser\Interfaces\NodeInterface;
 use Benkle\FeedParser\Interfaces\RuleInterface;
 use Benkle\FeedParser\Parser;
 
 /**
- * Class LastBuildDateRule
- * Parse last build date of an RSS feed.
- * @package Benkle\FeedParser\Standards\RSS20\Rules
+ * Class PubDateRule
+ * Parse item publication dates.
+ * @package Benkle\FeedParser\Standards\RSS\Rules
  */
-class LastBuildDateRule implements RuleInterface
+class PubDateRule implements RuleInterface
 {
 
     /**
@@ -40,7 +40,7 @@ class LastBuildDateRule implements RuleInterface
      */
     public function canHandle(\DOMNode $node, NodeInterface $target)
     {
-        return strtolower($node->nodeValue) == 'lastbuilddate' && $target instanceof FeedInterface;
+        return strtolower($node->nodeName) =='pubdate' && $target instanceof ItemInterface;
     }
 
     /**
@@ -52,7 +52,7 @@ class LastBuildDateRule implements RuleInterface
      */
     public function handle(Parser $parser, \DOMNode $node, NodeInterface $target)
     {
-        /** @var FeedInterface $target */
+        /** @var ItemInterface $target */
         $target->setLastModified(\DateTime::createFromFormat(\DateTime::RSS, $node->nodeValue));
     }
 }

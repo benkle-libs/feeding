@@ -16,7 +16,7 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\FeedParser\Standards\RSS20\Rules;
+namespace Benkle\FeedParser\Standards\RSS\Rules;
 
 
 use Benkle\FeedParser\Interfaces\FeedInterface;
@@ -27,7 +27,7 @@ use Benkle\FeedParser\Parser;
 /**
  * Class ChannelRule
  * A passthru rule to deal with that damn RSS channel tag.
- * @package Benkle\FeedParser\Standards\RSS20\Rules
+ * @package Benkle\FeedParser\Standards\RSS\Rules
  */
 class ChannelRule implements RuleInterface
 {

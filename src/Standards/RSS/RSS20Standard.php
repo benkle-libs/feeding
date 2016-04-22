@@ -16,47 +16,35 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\FeedParser\Standards\RSS20\Rules;
+namespace Benkle\FeedParser\Standards\RSS;
 
 
-use Benkle\FeedParser\FeedItem;
-use Benkle\FeedParser\Interfaces\FeedInterface;
-use Benkle\FeedParser\Interfaces\ItemInterface;
-use Benkle\FeedParser\Interfaces\NodeInterface;
-use Benkle\FeedParser\Interfaces\RuleInterface;
-use Benkle\FeedParser\Parser;
+use Benkle\FeedParser\Standards\RSS\Rules\SimpleRSSFieldRule;
 
 /**
- * Class ItemRule
- * Switch from parsing the feed to parsing an item.
- * @package Benkle\FeedParser\Standards\RSS20\Rules
+ * Class RSS20Standard
+ * Standard for handling RSS 2.0
+ * @package Benkle\FeedParser\Standards\RSS
  */
-class ItemRule implements RuleInterface
+class RSS20Standard extends RSS09Standard
 {
 
     /**
-     * Check if a dom node can be handled by this rule.
-     * @param \DOMNode $node
-     * @param NodeInterface $target
-     * @return bool
+     * RSS20Standard constructor.
      */
-    public function canHandle(\DOMNode $node, NodeInterface $target)
+    public function __construct()
     {
-        return strtolower($node->nodeName) == 'item' && $target instanceof FeedInterface;
+        parent::__construct();
+        $this->getRules()->add(new SimpleRSSFieldRule('guid', 'setPublicId'), 25);
     }
 
     /**
-     * Handle a dom node.
-     * @param Parser $parser
-     * @param \DOMNode $node
-     * @param NodeInterface $target
-     * @return void
+     * Get the pattern for matching RSS versions.
+     * @return string
      */
-    public function handle(Parser $parser, \DOMNode $node, NodeInterface $target)
+    protected function getVersionPattern()
     {
-        $item = new FeedItem();
-        $parser->parseNodeChildren($node, $item);
-        /** @var FeedInterface $target */
-        $target->addItem($item);
+        return '2.0*';
     }
+
 }
