@@ -179,4 +179,16 @@ class PriorityList implements \Iterator
         }
         return $this->entries[$this->position]['priority'];
     }
+
+    /**
+     * Returns all items, ordered by priority.
+     * @return array
+     */
+    public function toArray()
+    {
+        if (!$this->sorted) {
+            $this->rewind();
+        }
+        return array_map(function($entry) { return $entry['data']; }, $this->entries);
+    }
 }
