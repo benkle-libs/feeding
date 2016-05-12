@@ -80,6 +80,7 @@ class SimpleAtomFieldRule implements RuleInterface
      * Enable XHTML types.
      * @param \DOMNode $node
      * @return string
+     * @codeCoverageIgnore
      */
     private function getNodeContent(\DOMNode $node)
     {
