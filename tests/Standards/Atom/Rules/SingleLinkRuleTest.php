@@ -21,6 +21,7 @@ namespace Benkle\FeedParser\Standards\Atom\Rules;
 
 use Benkle\FeedParser\Interfaces\ChannelInterface;
 use Benkle\FeedParser\Interfaces\NodeInterface;
+use Benkle\FeedParser\Interfaces\RuleInterface;
 use Benkle\FeedParser\Parser;
 use Benkle\FeedParser\Standards\Atom\Atom10Standard;
 
@@ -30,19 +31,23 @@ class SingleLinkRuleTest extends \PHPUnit_Framework_TestCase
     public function testNewRule()
     {
         $rule = new SingleLinkRule('', '');
-        $this->assertInstanceOf(SingleLinkRule::class, $rule);
+        $this->assertInstanceOf(RuleInterface::class, $rule);
     }
 
     public function testCanHandle()
     {
         $rule = new SingleLinkRule('test', '');
         $dom = new \DOMDocument();
-        $domNode1 = $this->createLinkTag($dom, 'test', 'localhost');
-        $domNode2 = $this->createLinkTag($dom, 'tset', 'localhost');
         $node = $this->getMock(NodeInterface::class);
 
-        $this->assertEquals(true, $rule->canHandle($domNode1, $node));
-        $this->assertEquals(false, $rule->canHandle($domNode2, $node));
+        $domNode = $this->createLinkTag($dom, 'test', 'localhost');
+        $this->assertEquals(true, $rule->canHandle($domNode, $node));
+
+        $domNode = $this->createLinkTag($dom, 'test', 'localhost', true);
+        $this->assertEquals(true, $rule->canHandle($domNode, $node));
+
+        $domNode = $this->createLinkTag($dom, 'tset', 'localhost');
+        $this->assertEquals(false, $rule->canHandle($domNode, $node));
     }
 
     public function testHandle()
@@ -63,9 +68,9 @@ class SingleLinkRuleTest extends \PHPUnit_Framework_TestCase
         $rule->handle($parser, $domNode, $channel);
     }
 
-    private function createLinkTag(\DOMDocument $dom, $rel, $href)
+    private function createLinkTag(\DOMDocument $dom, $rel, $href, $upperCase = false)
     {
-        $node = $dom->createElementNS(Atom10Standard::NAMESPACE_URI, 'link');
+        $node = $dom->createElementNS(Atom10Standard::NAMESPACE_URI, $upperCase ? 'LINK' : 'link');
         $relAttr = $dom->createAttribute('rel');
         $relAttr->nodeValue = $rel;
         $node->appendChild($relAttr);

@@ -21,6 +21,7 @@ namespace Benkle\FeedParser\Standards\Atom\Rules;
 
 use Benkle\FeedParser\Interfaces\FeedInterface;
 use Benkle\FeedParser\Interfaces\ItemInterface;
+use Benkle\FeedParser\Interfaces\RuleInterface;
 use Benkle\FeedParser\Parser;
 use Benkle\FeedParser\Standards\Atom\Atom10Standard;
 
@@ -30,22 +31,25 @@ class EntryRuleTest extends \PHPUnit_Framework_TestCase
     public function testNewRule()
     {
         $rule = new EntryRule();
-        $this->assertInstanceOf(EntryRule::class, $rule);
+        $this->assertInstanceOf(RuleInterface::class, $rule);
     }
 
     public function testCanHandle()
     {
         $rule = new EntryRule();
         $dom = new \DOMDocument();
-        $domNode = $dom->createElementNS(Atom10Standard::NAMESPACE_URI, 'entry');
         $feed = $this->getMock(FeedInterface::class);
         $item = $this->getMock(ItemInterface::class);
 
+        $domNode = $dom->createElementNS(Atom10Standard::NAMESPACE_URI, 'entry');
         $this->assertEquals(true, $rule->canHandle($domNode, $feed));
         $this->assertEquals(false, $rule->canHandle($domNode, $item));
 
-        $domNode = $dom->createElementNS(Atom10Standard::NAMESPACE_URI, 'feed');
+        $domNode = $dom->createElementNS(Atom10Standard::NAMESPACE_URI, 'ENTRY');
+        $this->assertEquals(true, $rule->canHandle($domNode, $feed));
+        $this->assertEquals(false, $rule->canHandle($domNode, $item));
 
+        $domNode = $dom->createElementNS(Atom10Standard::NAMESPACE_URI, 'not-entry');
         $this->assertEquals(false, $rule->canHandle($domNode, $feed));
         $this->assertEquals(false, $rule->canHandle($domNode, $item));
     }

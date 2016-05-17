@@ -21,6 +21,7 @@ namespace Benkle\FeedParser\Standards\Atom\Rules;
 
 use Benkle\FeedParser\Interfaces\ChannelInterface;
 use Benkle\FeedParser\Interfaces\NodeInterface;
+use Benkle\FeedParser\Interfaces\RuleInterface;
 use Benkle\FeedParser\Parser;
 use Benkle\FeedParser\Standards\Atom\Atom10Standard;
 
@@ -30,22 +31,25 @@ class UpdatedRuleTest extends \PHPUnit_Framework_TestCase
     public function testNewRule()
     {
         $rule = new UpdatedRule();
-        $this->assertInstanceOf(UpdatedRule::class, $rule);
+        $this->assertInstanceOf(RuleInterface::class, $rule);
     }
 
     public function testCanHandle()
     {
         $rule = new UpdatedRule();
         $dom = new \DOMDocument();
-        $domNode = $dom->createElementNS(Atom10Standard::NAMESPACE_URI, 'updated');
         $channel = $this->getMock(ChannelInterface::class);
         $node = $this->getMock(NodeInterface::class);
 
+        $domNode = $dom->createElementNS(Atom10Standard::NAMESPACE_URI, 'updated');
         $this->assertEquals(true, $rule->canHandle($domNode, $channel));
         $this->assertEquals(false, $rule->canHandle($domNode, $node));
 
-        $domNode = $dom->createElementNS(Atom10Standard::NAMESPACE_URI, 'created');
+        $domNode = $dom->createElementNS(Atom10Standard::NAMESPACE_URI, 'UPDATED');
+        $this->assertEquals(true, $rule->canHandle($domNode, $channel));
+        $this->assertEquals(false, $rule->canHandle($domNode, $node));
 
+        $domNode = $dom->createElementNS(Atom10Standard::NAMESPACE_URI, 'not-updated');
         $this->assertEquals(false, $rule->canHandle($domNode, $channel));
         $this->assertEquals(false, $rule->canHandle($domNode, $node));
     }

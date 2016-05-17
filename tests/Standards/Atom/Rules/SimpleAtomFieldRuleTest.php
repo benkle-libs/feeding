@@ -21,6 +21,7 @@ namespace Benkle\FeedParser\Standards\Atom\Rules;
 
 use Benkle\FeedParser\Interfaces\ChannelInterface;
 use Benkle\FeedParser\Interfaces\NodeInterface;
+use Benkle\FeedParser\Interfaces\RuleInterface;
 use Benkle\FeedParser\Parser;
 use Benkle\FeedParser\Standards\Atom\Atom10Standard;
 
@@ -30,22 +31,25 @@ class SimpleAtomFieldRuleTest extends \PHPUnit_Framework_TestCase
     public function testNewRule()
     {
         $rule = new SimpleAtomFieldRule('', '');
-        $this->assertInstanceOf(SimpleAtomFieldRule::class, $rule);
+        $this->assertInstanceOf(RuleInterface::class, $rule);
     }
 
     public function testCanHandle()
     {
         $rule = new SimpleAtomFieldRule('test', '');
         $dom = new \DOMDocument();
-        $domNode = $dom->createElementNS(Atom10Standard::NAMESPACE_URI, 'test');
         $channel = $this->getMock(ChannelInterface::class);
         $node = $this->getMock(NodeInterface::class);
 
+        $domNode = $dom->createElementNS(Atom10Standard::NAMESPACE_URI, 'test');
+        $this->assertEquals(true, $rule->canHandle($domNode, $channel));
+        $this->assertEquals(false, $rule->canHandle($domNode, $node));
+
+        $domNode = $dom->createElementNS(Atom10Standard::NAMESPACE_URI, 'TEST');
         $this->assertEquals(true, $rule->canHandle($domNode, $channel));
         $this->assertEquals(false, $rule->canHandle($domNode, $node));
 
         $domNode = $dom->createElementNS(Atom10Standard::NAMESPACE_URI, 'tset');
-        
         $this->assertEquals(false, $rule->canHandle($domNode, $channel));
         $this->assertEquals(false, $rule->canHandle($domNode, $node));
     }

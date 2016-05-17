@@ -20,6 +20,7 @@ namespace Benkle\FeedParser\Standards\Atom;
 
 
 use Benkle\FeedParser\Interfaces\FeedInterface;
+use Benkle\FeedParser\Interfaces\StandardInterface;
 
 class Atom10StandardTest extends \PHPUnit_Framework_TestCase
 {
@@ -27,7 +28,7 @@ class Atom10StandardTest extends \PHPUnit_Framework_TestCase
     public function testNewAtom10Standard()
     {
         $standard = new Atom10Standard();
-        $this->assertInstanceOf(Atom10Standard::class, $standard);
+        $this->assertInstanceOf(StandardInterface::class, $standard);
     }
 
     public function testNewFeed()
