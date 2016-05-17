@@ -40,7 +40,7 @@ class LastBuildDateRule implements RuleInterface
      */
     public function canHandle(\DOMNode $node, NodeInterface $target)
     {
-        return strtolower($node->nodeValue) == 'lastbuilddate' && $target instanceof FeedInterface;
+        return strtolower($node->nodeName) == 'lastbuilddate' && $target instanceof FeedInterface;
     }
 
     /**

@@ -41,7 +41,7 @@ class LinkRule implements RuleInterface
      */
     public function canHandle(\DOMNode $node, NodeInterface $target)
     {
-        return strtolower($node->nodeName) =='link' && $target instanceof ChannelInterface;
+        return strtolower($node->nodeName) == 'link' && $target instanceof ChannelInterface;
     }
 
     /**

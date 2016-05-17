@@ -97,7 +97,8 @@ class RSS09Standard implements StandardInterface
         $result = false;
         $rootNodes = $dom->getElementsByTagName('rss');
         if ($rootNodes->length == 1) {
-            $result = fnmatch($this->getVersionPattern(), $rootNodes->item(0)->attributes->getNamedItem('version')->nodeValue);
+            $version = $rootNodes->item(0)->attributes->getNamedItem('version');
+            $result = $version && fnmatch($this->getVersionPattern(), $version->nodeValue);
         }
         return $result;
     }
