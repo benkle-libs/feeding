@@ -74,8 +74,8 @@ class Parser
     public function parseNodeChildren(\DOMNode $node, NodeInterface $target)
     {
         $rules = $this->getStandard()->getRules();
-        /** @var RuleInterface $childNode */
         foreach ($node->childNodes as $childNode) {
+            /** @var RuleInterface $rule */
             foreach ($rules as $rule) {
                 if ($rule->canHandle($childNode, $target)) {
                     $rule->handle($this, $childNode, $target);

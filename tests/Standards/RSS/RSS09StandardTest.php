@@ -21,6 +21,8 @@ namespace Benkle\FeedParser\Standards\RSS;
 
 use Benkle\FeedParser\Interfaces\FeedInterface;
 use Benkle\FeedParser\Interfaces\StandardInterface;
+use Benkle\FeedParser\Parser;
+use Benkle\FeedParser\Utilities\PriorityList;
 
 class RSS09StandardTest extends \PHPUnit_Framework_TestCase
 {
@@ -35,6 +37,18 @@ class RSS09StandardTest extends \PHPUnit_Framework_TestCase
     {
         $standard = new RSS09Standard();
         $this->assertInstanceOf(FeedInterface::class, $standard->newFeed());
+    }
+
+    public function testParser()
+    {
+        $standard = new RSS09Standard();
+        $this->assertInstanceOf(Parser::class, $standard->getParser());
+    }
+
+    public function testRulset()
+    {
+        $standard = new RSS09Standard();
+        $this->assertInstanceOf(PriorityList::class, $standard->getRules());
     }
 
     public function testCannotHandleDOMWithoutRootElement()
