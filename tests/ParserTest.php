@@ -52,8 +52,6 @@ class ParserTest extends \PHPUnit_Framework_TestCase
      */
     public function testParseNodeChildren(Parser $parser)
     {
-        $testCase = $this;
-
         $dom = new \DOMDocument();
         $node = $dom->createElement('test');
         $node2 = $dom->createElement('test2');
@@ -80,10 +78,10 @@ class ParserTest extends \PHPUnit_Framework_TestCase
             ->method('handle')
             ->will(
                 $this->returnCallback(
-                    function (Parser $parserIn, \DOMNode $nodeIn, NodeInterface $targetIn) use ($node2, $testCase, $parser, $target) {
-                        $testCase->assertEquals($parser, $parserIn);
-                        $testCase->assertEquals($node2, $nodeIn);
-                        $testCase->assertEquals($target, $targetIn);
+                    function (Parser $parserIn, \DOMNode $nodeIn, NodeInterface $targetIn) use ($node2, $parser, $target) {
+                        $this->assertEquals($parser, $parserIn);
+                        $this->assertEquals($node2, $nodeIn);
+                        $this->assertEquals($target, $targetIn);
                     }
                 )
             );
