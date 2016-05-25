@@ -94,7 +94,9 @@ class FallbackStackParser implements DOMParserInterface, LoggerAwareInterface
                                 ]
             );
         } else {
+            // @codeCoverageIgnoreStart
             error_log(sprintf('[%s] [%s:%d] %s', $e->getCode(), $e->getFile(), $e->getLine(), $e->getMessage()), E_NOTICE);
+            // @codeCoverageIgnoreEnd
         }
     }
 }
