@@ -80,7 +80,7 @@ class Reader extends BasicReader
      * @param Client $httpClient
      * @return $this
      */
-    public function setHttpClient($httpClient)
+    public function setHttpClient(Client $httpClient)
     {
         $this->httpClient = $httpClient;
         return $this;
@@ -100,7 +100,7 @@ class Reader extends BasicReader
      * @param FileAccessInterface $fileAccess
      * @return $this
      */
-    public function setFileAccess($fileAccess)
+    public function setFileAccess(FileAccessInterface $fileAccess)
     {
         $this->fileAccess = $fileAccess;
         return $this;

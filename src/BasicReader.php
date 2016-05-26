@@ -68,7 +68,7 @@ class BasicReader
      * @param DOMParserInterface $domParser
      * @return $this
      */
-    public function setDomParser($domParser)
+    public function setDomParser(DOMParserInterface $domParser)
     {
         $this->domParser = $domParser;
         return $this;
