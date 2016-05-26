@@ -16,11 +16,11 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\FeedParser\Traits;
+namespace Benkle\Feeding\Traits;
 
 
-use Benkle\FeedParser\Interfaces\RuleInterface;
-use Benkle\FeedParser\Utilities\PriorityList;
+use Benkle\Feeding\Interfaces\RuleInterface;
+use Benkle\Feeding\Utilities\PriorityList;
 
 trait WithRuleSetTrait
 {

@@ -16,12 +16,12 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\FeedParser\Standards\RSS;
+namespace Benkle\Feeding\Standards\RSS;
 
 /**
  * Class RSS10Standard
  * Standard for handling RSS 1.0
- * @package Benkle\FeedParser\Standards\RSS
+ * @package Benkle\Feeding\Standards\RSS
  */
 class RSS10Standard extends RSS09Standard
 {

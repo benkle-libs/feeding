@@ -16,18 +16,18 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\FeedParser;
+namespace Benkle\Feeding;
 
 
-use Benkle\FeedParser\Interfaces\FeedInterface;
-use Benkle\FeedParser\Interfaces\NodeInterface;
-use Benkle\FeedParser\Interfaces\RuleInterface;
-use Benkle\FeedParser\Interfaces\StandardInterface;
+use Benkle\Feeding\Interfaces\FeedInterface;
+use Benkle\Feeding\Interfaces\NodeInterface;
+use Benkle\Feeding\Interfaces\RuleInterface;
+use Benkle\Feeding\Interfaces\StandardInterface;
 
 /**
  * Class Parser
  * Our basic "parser". It walks over the dom document and applies the rules of a standards ruleset to the nodes.
- * @package Benkle\FeedParser
+ * @package Benkle\Feeding
  */
 class Parser
 {

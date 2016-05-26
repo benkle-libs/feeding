@@ -16,11 +16,11 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\FeedParser;
+namespace Benkle\Feeding;
 
 
-use Benkle\FeedParser\Interfaces\FeedInterface;
-use Benkle\FeedParser\Interfaces\ItemInterface;
+use Benkle\Feeding\Interfaces\FeedInterface;
+use Benkle\Feeding\Interfaces\ItemInterface;
 
 class FeedTest extends \PHPUnit_Framework_TestCase
 {

@@ -16,25 +16,25 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\FeedParser;
+namespace Benkle\Feeding;
 
 
-use Benkle\FeedParser\DOMParsers\FallbackStackParser;
-use Benkle\FeedParser\DOMParsers\MastermindsHTML5Parser;
-use Benkle\FeedParser\DOMParsers\PHPDOMParser;
-use Benkle\FeedParser\FileAccess\BasicFileAccess;
-use Benkle\FeedParser\Interfaces\FileAccessInterface;
-use Benkle\FeedParser\Standards\Atom\Atom10Standard;
-use Benkle\FeedParser\Standards\RSS\RSS09Standard;
-use Benkle\FeedParser\Standards\RSS\RSS10Standard;
-use Benkle\FeedParser\Standards\RSS\RSS20Standard;
+use Benkle\Feeding\DOMParsers\FallbackStackParser;
+use Benkle\Feeding\DOMParsers\MastermindsHTML5Parser;
+use Benkle\Feeding\DOMParsers\PHPDOMParser;
+use Benkle\Feeding\FileAccess\BasicFileAccess;
+use Benkle\Feeding\Interfaces\FileAccessInterface;
+use Benkle\Feeding\Standards\Atom\Atom10Standard;
+use Benkle\Feeding\Standards\RSS\RSS09Standard;
+use Benkle\Feeding\Standards\RSS\RSS10Standard;
+use Benkle\Feeding\Standards\RSS\RSS20Standard;
 use GuzzleHttp\Client;
 
 /**
  * Class Reader
  * This is the reader class for all those who only need the basic standards and just want to fetch a feed from the web
  * parse it.
- * @package Benkle\FeedParser
+ * @package Benkle\Feeding
  */
 class Reader extends BasicReader
 {

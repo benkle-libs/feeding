@@ -16,16 +16,16 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\FeedParser\Interfaces;
+namespace Benkle\Feeding\Interfaces;
 
 
-use Benkle\FeedParser\Parser;
-use Benkle\FeedParser\Utilities\PriorityList;
+use Benkle\Feeding\Parser;
+use Benkle\Feeding\Utilities\PriorityList;
 
 /**
  * Interface StandardInterface
  * A Standard is a combination of rule set, feed class factory and feed identification.
- * @package Benkle\FeedParser\Interfaces
+ * @package Benkle\Feeding\Interfaces
  */
 interface StandardInterface
 {

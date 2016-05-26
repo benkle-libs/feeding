@@ -16,18 +16,18 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\FeedParser\Standards\RSS\Rules;
+namespace Benkle\Feeding\Standards\RSS\Rules;
 
 
-use Benkle\FeedParser\Interfaces\ItemInterface;
-use Benkle\FeedParser\Interfaces\NodeInterface;
-use Benkle\FeedParser\Interfaces\RuleInterface;
-use Benkle\FeedParser\Parser;
+use Benkle\Feeding\Interfaces\ItemInterface;
+use Benkle\Feeding\Interfaces\NodeInterface;
+use Benkle\Feeding\Interfaces\RuleInterface;
+use Benkle\Feeding\Parser;
 
 /**
  * Class PubDateRule
  * Parse item publication dates.
- * @package Benkle\FeedParser\Standards\RSS\Rules
+ * @package Benkle\Feeding\Standards\RSS\Rules
  */
 class PubDateRule implements RuleInterface
 {

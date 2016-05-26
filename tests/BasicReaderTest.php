@@ -16,12 +16,12 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\FeedParser;
+namespace Benkle\Feeding;
 
 
-use Benkle\FeedParser\Interfaces\DOMParserInterface;
-use Benkle\FeedParser\Interfaces\StandardInterface;
-use Benkle\FeedParser\Utilities\PriorityList;
+use Benkle\Feeding\Interfaces\DOMParserInterface;
+use Benkle\Feeding\Interfaces\StandardInterface;
+use Benkle\Feeding\Utilities\PriorityList;
 
 class BasicReaderTest extends \PHPUnit_Framework_TestCase
 {

@@ -16,19 +16,19 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\FeedParser;
+namespace Benkle\Feeding;
 
 
-use Benkle\FeedParser\Interfaces\ItemInterface;
-use Benkle\FeedParser\Traits\WithDescriptionTrait;
-use Benkle\FeedParser\Traits\WithLastModifiedTrait;
-use Benkle\FeedParser\Traits\WithLinkTrait;
-use Benkle\FeedParser\Traits\WithPublicIdTrait;
-use Benkle\FeedParser\Traits\WithTitleTrait;
+use Benkle\Feeding\Interfaces\ItemInterface;
+use Benkle\Feeding\Traits\WithDescriptionTrait;
+use Benkle\Feeding\Traits\WithLastModifiedTrait;
+use Benkle\Feeding\Traits\WithLinkTrait;
+use Benkle\Feeding\Traits\WithPublicIdTrait;
+use Benkle\Feeding\Traits\WithTitleTrait;
 
 /**
  * Class FeedItem
- * @package Benkle\FeedParser
+ * @package Benkle\Feeding
  */
 class FeedItem implements ItemInterface, \JsonSerializable
 {

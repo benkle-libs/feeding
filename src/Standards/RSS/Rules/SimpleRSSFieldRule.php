@@ -16,18 +16,18 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\FeedParser\Standards\RSS\Rules;
+namespace Benkle\Feeding\Standards\RSS\Rules;
 
 
-use Benkle\FeedParser\Interfaces\ChannelInterface;
-use Benkle\FeedParser\Interfaces\NodeInterface;
-use Benkle\FeedParser\Interfaces\RuleInterface;
-use Benkle\FeedParser\Parser;
+use Benkle\Feeding\Interfaces\ChannelInterface;
+use Benkle\Feeding\Interfaces\NodeInterface;
+use Benkle\Feeding\Interfaces\RuleInterface;
+use Benkle\Feeding\Parser;
 
 /**
  * Class SimpleRSSFieldRule
  * A simple catch-any for all of those simpler RSS elements.
- * @package Benkle\FeedParser\Standards\RSS\Rules
+ * @package Benkle\Feeding\Standards\RSS\Rules
  */
 class SimpleRSSFieldRule implements RuleInterface
 {

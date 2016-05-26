@@ -16,15 +16,15 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\FeedParser\DOMParsers;
+namespace Benkle\Feeding\DOMParsers;
 
 
-use Benkle\FeedParser\Interfaces\DOMParserInterface;
+use Benkle\Feeding\Interfaces\DOMParserInterface;
 
 /**
  * Class PHPDOMParser
  * Adapter for the PHP DOM module.
- * @package Benkle\FeedParser\DOMParsers
+ * @package Benkle\Feeding\DOMParsers
  */
 class PHPDOMParser implements DOMParserInterface
 {

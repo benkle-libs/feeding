@@ -16,23 +16,23 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\FeedParser\Standards\Atom;
+namespace Benkle\Feeding\Standards\Atom;
 
 
-use Benkle\FeedParser\Feed;
-use Benkle\FeedParser\Interfaces\FeedInterface;
-use Benkle\FeedParser\Interfaces\StandardInterface;
-use Benkle\FeedParser\Standards\Atom\Rules\EntryRule;
-use Benkle\FeedParser\Standards\Atom\Rules\SimpleAtomFieldRule;
-use Benkle\FeedParser\Standards\Atom\Rules\SingleLinkRule;
-use Benkle\FeedParser\Standards\Atom\Rules\UpdatedRule;
-use Benkle\FeedParser\Traits\WithParserTrait;
-use Benkle\FeedParser\Traits\WithRuleSetTrait;
+use Benkle\Feeding\Feed;
+use Benkle\Feeding\Interfaces\FeedInterface;
+use Benkle\Feeding\Interfaces\StandardInterface;
+use Benkle\Feeding\Standards\Atom\Rules\EntryRule;
+use Benkle\Feeding\Standards\Atom\Rules\SimpleAtomFieldRule;
+use Benkle\Feeding\Standards\Atom\Rules\SingleLinkRule;
+use Benkle\Feeding\Standards\Atom\Rules\UpdatedRule;
+use Benkle\Feeding\Traits\WithParserTrait;
+use Benkle\Feeding\Traits\WithRuleSetTrait;
 
 /**
  * Class Atom10Standard
  * Standard for handling Atom 1.0
- * @package Benkle\FeedParser\Standards\Atom
+ * @package Benkle\Feeding\Standards\Atom
  */
 class Atom10Standard implements StandardInterface
 {

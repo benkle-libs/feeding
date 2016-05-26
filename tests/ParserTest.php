@@ -16,15 +16,15 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\FeedParser;
+namespace Benkle\Feeding;
 
 
-use Benkle\FeedParser\Interfaces\ChannelInterface;
-use Benkle\FeedParser\Interfaces\FeedInterface;
-use Benkle\FeedParser\Interfaces\NodeInterface;
-use Benkle\FeedParser\Interfaces\RuleInterface;
-use Benkle\FeedParser\Interfaces\StandardInterface;
-use Benkle\FeedParser\Utilities\PriorityList;
+use Benkle\Feeding\Interfaces\ChannelInterface;
+use Benkle\Feeding\Interfaces\FeedInterface;
+use Benkle\Feeding\Interfaces\NodeInterface;
+use Benkle\Feeding\Interfaces\RuleInterface;
+use Benkle\Feeding\Interfaces\StandardInterface;
+use Benkle\Feeding\Utilities\PriorityList;
 
 class ParserTest extends \PHPUnit_Framework_TestCase
 {

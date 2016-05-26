@@ -16,13 +16,13 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\FeedParser\Utilities;
+namespace Benkle\Feeding\Utilities;
 
 /**
  * Class PriorityList
  * This class is for prioritised lists.
  * It might be moved to another package in the future.
- * @package Benkle\FeedParser\Utilities
+ * @package Benkle\Feeding\Utilities
  */
 class PriorityList implements \Iterator
 {

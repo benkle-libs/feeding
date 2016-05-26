@@ -16,12 +16,12 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\FeedParser\Interfaces;
+namespace Benkle\Feeding\Interfaces;
 
 /**
  * Interface DOMParserInterface
  * Abstraction for DOM Parsers, because DOMDocument kinda sucks with namespaces, but is really fast...
- * @package Benkle\FeedParser\Interfaces
+ * @package Benkle\Feeding\Interfaces
  */
 interface DOMParserInterface
 {

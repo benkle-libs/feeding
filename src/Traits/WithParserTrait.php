@@ -16,10 +16,10 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\FeedParser\Traits;
+namespace Benkle\Feeding\Traits;
 
 
-use Benkle\FeedParser\Parser;
+use Benkle\Feeding\Parser;
 
 trait WithParserTrait
 {

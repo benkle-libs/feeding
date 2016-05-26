@@ -16,14 +16,14 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\FeedParser\Standards\Atom\Rules;
+namespace Benkle\Feeding\Standards\Atom\Rules;
 
 
-use Benkle\FeedParser\Interfaces\ChannelInterface;
-use Benkle\FeedParser\Interfaces\NodeInterface;
-use Benkle\FeedParser\Interfaces\RuleInterface;
-use Benkle\FeedParser\Parser;
-use Benkle\FeedParser\Standards\Atom\Atom10Standard;
+use Benkle\Feeding\Interfaces\ChannelInterface;
+use Benkle\Feeding\Interfaces\NodeInterface;
+use Benkle\Feeding\Interfaces\RuleInterface;
+use Benkle\Feeding\Parser;
+use Benkle\Feeding\Standards\Atom\Atom10Standard;
 
 class SimpleAtomFieldRuleTest extends \PHPUnit_Framework_TestCase
 {

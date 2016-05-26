@@ -16,21 +16,21 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\FeedParser;
+namespace Benkle\Feeding;
 
 
-use Benkle\FeedParser\Interfaces\FeedInterface;
-use Benkle\FeedParser\Traits\WithDescriptionTrait;
-use Benkle\FeedParser\Traits\WithFeedItemsTrait;
-use Benkle\FeedParser\Traits\WithLastModifiedTrait;
-use Benkle\FeedParser\Traits\WithLinkTrait;
-use Benkle\FeedParser\Traits\WithPublicIdTrait;
-use Benkle\FeedParser\Traits\WithTitleTrait;
-use Benkle\FeedParser\Traits\WithUrlTrait;
+use Benkle\Feeding\Interfaces\FeedInterface;
+use Benkle\Feeding\Traits\WithDescriptionTrait;
+use Benkle\Feeding\Traits\WithFeedItemsTrait;
+use Benkle\Feeding\Traits\WithLastModifiedTrait;
+use Benkle\Feeding\Traits\WithLinkTrait;
+use Benkle\Feeding\Traits\WithPublicIdTrait;
+use Benkle\Feeding\Traits\WithTitleTrait;
+use Benkle\Feeding\Traits\WithUrlTrait;
 
 /**
  * Class Feed
- * @package Benkle\FeedParser
+ * @package Benkle\Feeding
  */
 class Feed implements FeedInterface, \JsonSerializable
 {

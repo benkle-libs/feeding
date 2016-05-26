@@ -16,10 +16,10 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\FeedParser\DOMParsers;
+namespace Benkle\Feeding\DOMParsers;
 
 
-use Benkle\FeedParser\Interfaces\DOMParserInterface;
+use Benkle\Feeding\Interfaces\DOMParserInterface;
 use Psr\Log\LoggerInterface;
 
 class FallbackStackParserTest extends \PHPUnit_Framework_TestCase

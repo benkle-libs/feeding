@@ -16,12 +16,12 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\FeedParser\Interfaces;
+namespace Benkle\Feeding\Interfaces;
 
 /**
  * Interface ChannelInterface
  * The Channel interface bundles all properties that exists for both feeds and feed items.
- * @package Benkle\FeedParser\Interfaces
+ * @package Benkle\Feeding\Interfaces
  */
 interface ChannelInterface extends NodeInterface
 {
