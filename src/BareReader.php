@@ -24,12 +24,12 @@ use Benkle\Feeding\Interfaces\StandardInterface;
 use Benkle\Feeding\Utilities\PriorityList;
 
 /**
- * Class BasicReader
+ * Class BareReader
  * This basic reader class handles parsing of source strings into a DOMDocument and selecting the right standard to
  * produce a feed object.
  * @package Benkle\Feeding
  */
-class BasicReader
+class BareReader
 {
     /** @var DOMParserInterface */
     private $domParser;
@@ -38,7 +38,7 @@ class BasicReader
     private $standards;
 
     /**
-     * BasicReader constructor.
+     * BareReader constructor.
      */
     public function __construct()
     {

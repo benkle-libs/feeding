@@ -23,24 +23,24 @@ use Benkle\Feeding\Interfaces\DOMParserInterface;
 use Benkle\Feeding\Interfaces\StandardInterface;
 use Benkle\Feeding\Utilities\PriorityList;
 
-class BasicReaderTest extends \PHPUnit_Framework_TestCase
+class BareReaderTest extends \PHPUnit_Framework_TestCase
 {
 
     public function testNewBasicReader()
     {
-        $reader = new BasicReader();
-        $this->assertInstanceOf(BasicReader::class, $reader);
+        $reader = new BareReader();
+        $this->assertInstanceOf(BareReader::class, $reader);
     }
 
     public function testGetStandards()
     {
-        $reader = new BasicReader();
+        $reader = new BareReader();
         $this->assertInstanceOf(PriorityList::class, $reader->getStandards());
     }
 
     public function testSetAndGetDOMParser()
     {
-        $reader = new BasicReader();
+        $reader = new BareReader();
         $parser = $this->getMock(DOMParserInterface::class);
         $this->assertEquals($reader, $reader->setDomParser($parser));
         $this->assertEquals($parser, $reader->getDomParser());
@@ -52,7 +52,7 @@ class BasicReaderTest extends \PHPUnit_Framework_TestCase
      */
     public function testReadWithoutStandards()
     {
-        $reader = new BasicReader();
+        $reader = new BareReader();
         $parser = $this->getMock(DOMParserInterface::class);
         $parser
             ->expects($this->exactly(1))
@@ -66,7 +66,7 @@ class BasicReaderTest extends \PHPUnit_Framework_TestCase
 
     public function testReadWithStandards()
     {
-        $reader = new BasicReader();
+        $reader = new BareReader();
         $parser = $this->getMock(DOMParserInterface::class);
         $parser
             ->expects($this->exactly(1))

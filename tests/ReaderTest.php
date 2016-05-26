@@ -33,7 +33,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
     public function testNewReader()
     {
         $reader = new Reader();
-        $this->assertInstanceOf(BasicReader::class, $reader);
+        $this->assertInstanceOf(BareReader::class, $reader);
         $this->assertInstanceOf(Reader::class, $reader);
     }
 
@@ -53,7 +53,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($fileAccess, $reader->getFileAccess());
     }
 
-    private function mockBasicReader(BasicReader $reader)
+    private function mockBasicReader(BareReader $reader)
     {
         $parser = $this->getMock(DOMParserInterface::class);
         $parser

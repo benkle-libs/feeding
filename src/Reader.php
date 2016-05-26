@@ -36,7 +36,7 @@ use GuzzleHttp\Client;
  * parse it.
  * @package Benkle\Feeding
  */
-class Reader extends BasicReader
+class Reader extends BareReader
 {
     /** @var Client */
     private $httpClient;
