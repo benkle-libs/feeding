@@ -38,7 +38,7 @@ foreach ($feed->getItems() as $item) {
 }
 ```
 
-The `Reader::parse` can take urls, file pathes or the direct feed source, and will select one of the preexisting feed standards to parse the data into objects.
+The `Reader::read` can take urls, file pathes or the direct feed source, and will select one of the preexisting feed standards to parse the data into objects.
 
 ### Create your own rules
 
