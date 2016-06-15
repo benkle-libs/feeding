@@ -19,7 +19,7 @@
 namespace Benkle\Feeding\Standards\Atom\Rules;
 
 
-use Benkle\Feeding\FeedItem;
+use Benkle\Feeding\Standards\Atom\FeedItem;
 use Benkle\Feeding\Interfaces\FeedInterface;
 use Benkle\Feeding\Interfaces\NodeInterface;
 use Benkle\Feeding\Interfaces\RuleInterface;
