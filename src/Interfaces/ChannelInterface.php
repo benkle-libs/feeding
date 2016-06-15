@@ -89,4 +89,25 @@ interface ChannelInterface extends NodeInterface
      * @return $this
      */
     public function setLink($link);
+
+    /**
+     * Get a relation link.
+     * @param string $relation
+     * @return string
+     */
+    public function getRelation($relation);
+
+    /**
+     * Get all relations.
+     * @return string[]
+     */
+    public function getRelations();
+
+    /**
+     * Set a relation link.
+     * @param string $relation
+     * @param string $link
+     * @return $this
+     */
+    public function setRelation($relation, $link);
 }

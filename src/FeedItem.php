@@ -25,6 +25,7 @@ use Benkle\Feeding\Traits\WithLastModifiedTrait;
 use Benkle\Feeding\Traits\WithLinkTrait;
 use Benkle\Feeding\Traits\WithPublicIdTrait;
 use Benkle\Feeding\Traits\WithTitleTrait;
+use Benkle\Feeding\Traits\WithRelationsTrait;
 
 /**
  * Class FeedItem
@@ -32,7 +33,7 @@ use Benkle\Feeding\Traits\WithTitleTrait;
  */
 class FeedItem implements ItemInterface, \JsonSerializable
 {
-    use WithPublicIdTrait, WithLastModifiedTrait, WithLinkTrait, WithDescriptionTrait, WithTitleTrait;
+    use WithPublicIdTrait, WithLastModifiedTrait, WithLinkTrait, WithDescriptionTrait, WithTitleTrait, WithRelationsTrait;
 
     /**
      * Specify data which should be serialized to JSON
@@ -44,11 +45,12 @@ class FeedItem implements ItemInterface, \JsonSerializable
     function jsonSerialize()
     {
         return [
-            'title' => $this->getTitle(),
-            'description' => $this->getDescription(),
+            'title'        => $this->getTitle(),
+            'description'  => $this->getDescription(),
             'lastModified' => $this->getLastModified()->format(\DateTime::ATOM),
-            'publicId' => $this->getPublicId(),
-            'link' => $this->getLink(),
+            'publicId'     => $this->getPublicId(),
+            'link'         => $this->getLink(),
+            'relations'    => $this->getRelations(),
         ];
     }
 }

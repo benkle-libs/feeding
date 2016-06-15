@@ -139,13 +139,52 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $this->assertContains($feedItem, $protoJson['items']);
     }
 
+    public function testWithRelations()
+    {
+        $feed = $this->create();
+
+        $this->assertEmpty($feed->getRelations());
+
+        $feed->setRelation('test', 'test');
+        $this->assertNotEmpty($feed->getRelations());
+        $this->assertCount(1, $feed->getRelations());
+        $this->assertArrayHasKey('test', $feed->getRelations());
+        $this->assertEquals(['test' => 'test'], $feed->getRelations());
+        $this->assertEquals('test', $feed->getRelation('test'));
+
+        $feed->setRelation('test', 'test2');
+        $this->assertNotEmpty($feed->getRelations());
+        $this->assertCount(1, $feed->getRelations());
+        $this->assertArrayHasKey('test', $feed->getRelations());
+        $this->assertEquals(['test' => 'test2'], $feed->getRelations());
+        $this->assertEquals('test2', $feed->getRelation('test'));
+
+        $feed->setRelation('test2', 'test3');
+        $this->assertNotEmpty($feed->getRelations());
+        $this->assertCount(2, $feed->getRelations());
+        $this->assertArrayHasKey('test2', $feed->getRelations());
+        $this->assertEquals(['test' => 'test2', 'test2' => 'test3'], $feed->getRelations());
+        $this->assertEquals('test3', $feed->getRelation('test2'));
+    }
+
+    /**
+     * @expectedException \Exception
+     * @expectedExceptionMessage Relation 'test' not found
+     */
+    public function testWithRelationsException()
+    {
+        $feed = $this->create();
+        $this->assertEmpty($feed->getRelations());
+        $feed->getRelation('test');
+    }
+
     /**
      * @return Feed
      */
     private function create()
     {
-        $feedItem = new Feed();
-        return $feedItem;
+        $feed = new Feed();
+        return $feed;
     }
 
 }

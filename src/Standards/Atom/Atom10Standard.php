@@ -23,6 +23,7 @@ use Benkle\Feeding\Feed;
 use Benkle\Feeding\Interfaces\FeedInterface;
 use Benkle\Feeding\Interfaces\StandardInterface;
 use Benkle\Feeding\Standards\Atom\Rules\EntryRule;
+use Benkle\Feeding\Standards\Atom\Rules\RelationsLinkRule;
 use Benkle\Feeding\Standards\Atom\Rules\SimpleAtomFieldRule;
 use Benkle\Feeding\Standards\Atom\Rules\SingleLinkRule;
 use Benkle\Feeding\Standards\Atom\Rules\UpdatedRule;
@@ -54,6 +55,7 @@ class Atom10Standard implements StandardInterface
             ->add(new UpdatedRule(), 10)
             ->add(new SingleLinkRule('self', 'setUrl'), 20)
             ->add(new SingleLinkRule('alternate', 'setLink'), 20)
+            ->add(new RelationsLinkRule(), 25)
             ->add(new EntryRule(), 50)
         ;
     }
