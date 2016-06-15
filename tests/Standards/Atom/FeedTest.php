@@ -121,6 +121,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $publicId = uniqid();
         $url = uniqid();
         $feedItem = $this->getMock(ItemInterface::class);
+        $relation = uniqid();
 
         $feed->setTitle($title);
         $feed->setDescription($description);
@@ -129,6 +130,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $feed->setPublicId($publicId);
         $feed->setUrl($url);
         $feed->addItem($feedItem);
+        $feed->setRelation('test', $relation);
 
         $protoJson = $feed->jsonSerialize();
 
@@ -153,6 +155,10 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('items', $protoJson);
         $this->assertCount(1, $protoJson['items']);
         $this->assertContains($feedItem, $protoJson['items']);
+
+        $this->assertArrayHasKey('relations', $protoJson);
+        $this->assertGreaterThanOrEqual(1, count($protoJson['relations']));
+        $this->assertContains($relation, $protoJson['relations']);
     }
 
     public function testWithRelations()

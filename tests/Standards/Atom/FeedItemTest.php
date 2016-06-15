@@ -89,12 +89,14 @@ class FeedItemTest extends \PHPUnit_Framework_TestCase
         $link = uniqid();
         $lastModified = new \DateTime('2000-01-01');
         $publicId = uniqid();
+        $relation = uniqid();
 
         $feedItem->setTitle($title);
         $feedItem->setDescription($description);
         $feedItem->setLink($link);
         $feedItem->setLastModified($lastModified);
         $feedItem->setPublicId($publicId);
+        $feedItem->setRelation('test', $relation);
 
         $protoJson = $feedItem->jsonSerialize();
 
@@ -112,6 +114,10 @@ class FeedItemTest extends \PHPUnit_Framework_TestCase
 
         $this->assertArrayHasKey('link', $protoJson);
         $this->assertEquals($link, $protoJson['link']);
+
+        $this->assertArrayHasKey('relations', $protoJson);
+        $this->assertGreaterThanOrEqual(1, count($protoJson['relations']));
+        $this->assertContains($relation, $protoJson['relations']);
     }
 
     /**
