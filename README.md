@@ -178,6 +178,5 @@ $reader->getStandards()->add(new \Benkle\Feeding\Standards\RSS\RSS20Standard());
 TODO
 ----
 
- * Add support for enclosures and relational links.
  * Moved included class `PriorityList` to a utility package.
  * Put Guzzle behind a facade similar to the `FileAccessInterface`?
