@@ -21,6 +21,7 @@ namespace Benkle\Feeding\Standards\Atom;
 
 use Benkle\Feeding\Interfaces\FeedInterface;
 use Benkle\Feeding\Interfaces\StandardInterface;
+use Benkle\Feeding\Standards\Atom\Rules\EnclosureLinkRule;
 use Benkle\Feeding\Standards\Atom\Rules\EntryRule;
 use Benkle\Feeding\Standards\Atom\Rules\RelationsLinkRule;
 use Benkle\Feeding\Standards\Atom\Rules\SimpleAtomFieldRule;
@@ -52,6 +53,7 @@ class Atom10Standard implements StandardInterface
             ->add(new SimpleAtomFieldRule('subtitle', 'setDescription'), 10)
             ->add(new SimpleAtomFieldRule('summary', 'setDescription'), 10)
             ->add(new UpdatedRule(), 10)
+            ->add(new EnclosureLinkRule(), 20)
             ->add(new RelationsLinkRule(), 25)
             ->add(new EntryRule(), 50)
         ;

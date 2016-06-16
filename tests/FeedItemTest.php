@@ -19,6 +19,7 @@
 namespace Benkle\Feeding;
 
 
+use Benkle\Feeding\Interfaces\EnclosureInterface;
 use Benkle\Feeding\Interfaces\ItemInterface;
 
 class FeedItemTest extends \PHPUnit_Framework_TestCase
@@ -70,6 +71,21 @@ class FeedItemTest extends \PHPUnit_Framework_TestCase
         $title = uniqid();
         $feedItem->setTitle($title);
         $this->assertEquals($title, $feedItem->getTitle());
+    }
+
+    public function testWithEnclosures()
+    {
+        $feedItem = $this->create();
+        $enclosure = $this->getMock(EnclosureInterface::class);
+
+        $this->assertCount(0, $feedItem->getEnclosures());
+        $this->assertInternalType('array', $feedItem->getEnclosures());
+        $feedItem->addEnclosure($enclosure);
+        $this->assertCount(1, $feedItem->getEnclosures());
+        $this->assertContains($enclosure, $feedItem->getEnclosures());
+        $feedItem->removeEnclosure($enclosure);
+        $this->assertCount(0, $feedItem->getEnclosures());
+        $this->assertNotContains($enclosure, $feedItem->getEnclosures());
     }
 
     public function testJsonSerialize()

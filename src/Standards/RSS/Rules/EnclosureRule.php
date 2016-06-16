@@ -16,21 +16,21 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\Feeding\Standards\Atom\Rules;
+namespace Benkle\Feeding\Standards\RSS\Rules;
 
 
-use Benkle\Feeding\Interfaces\ChannelInterface;
+use Benkle\Feeding\Enclosure;
+use Benkle\Feeding\Interfaces\ItemInterface;
 use Benkle\Feeding\Interfaces\NodeInterface;
 use Benkle\Feeding\Interfaces\RuleInterface;
 use Benkle\Feeding\Parser;
-use Benkle\Feeding\Standards\Atom\Atom10Standard;
 
 /**
- * Class RelationsLinkRule
- * Rule for atom relation links.
- * @package Benkle\Feeding\Standards\Atom\Rules
+ * Class EnclosureRule
+ * Parsing rule for media enclosures.
+ * @package Benkle\Feeding\Standards\RSS\Rules
  */
-class RelationsLinkRule implements RuleInterface
+class EnclosureRule implements RuleInterface
 {
 
     /**
@@ -41,10 +41,7 @@ class RelationsLinkRule implements RuleInterface
      */
     public function canHandle(\DOMNode $node, NodeInterface $target)
     {
-        return
-            strtolower($node->localName) == 'link' &&
-            $node->namespaceURI == Atom10Standard::NAMESPACE_URI &&
-            $target instanceof ChannelInterface;
+        return strtolower($node->nodeName) == 'enclosure' && $target Instanceof ItemInterface;
     }
 
     /**
@@ -56,9 +53,17 @@ class RelationsLinkRule implements RuleInterface
      */
     public function handle(Parser $parser, \DOMNode $node, NodeInterface $target)
     {
-        $relation = $node->attributes->getNamedItem('rel')->nodeValue;
-        $link = $node->attributes->getNamedItem('href')->nodeValue;
-        /** @var ChannelInterface $target */
-        $target->setRelation($relation, $link);
+        $url = $node->attributes->getNamedItem('url')->nodeValue;
+        $type = $node->attributes->getNamedItem('type')->nodeValue;
+        $length = intval($node->attributes->getNamedItem('length')->nodeValue, 10);
+        $title = $node->attributes->getNamedItem('title') ? $node->attributes->getNamedItem('title')->nodeValue : basename($url);
+        $enclosure = new Enclosure();
+        $enclosure
+            ->setType($type)
+            ->setLength($length)
+            ->setTitle($title)
+            ->setUrl($url);
+        /** @var ItemInterface $target */
+        $target->addEnclosure($enclosure);
     }
 }

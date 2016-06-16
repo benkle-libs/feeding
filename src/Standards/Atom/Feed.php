@@ -27,6 +27,11 @@ use Benkle\Feeding\Traits\WithPublicIdTrait;
 use Benkle\Feeding\Traits\WithRelationsTrait;
 use Benkle\Feeding\Traits\WithTitleTrait;
 
+/**
+ * Class Feed
+ * This class contains special mapping for Link and URL.
+ * @package Benkle\Feeding\Standards\Atom
+ */
 class Feed implements FeedInterface, \JsonSerializable
 {
     use WithTitleTrait, WithPublicIdTrait, WithDescriptionTrait,

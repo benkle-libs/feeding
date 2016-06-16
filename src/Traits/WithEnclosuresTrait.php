@@ -16,32 +16,49 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\Feeding\Interfaces;
+namespace Benkle\Feeding\Traits;
 
-/**
- * Interface ItemInterface
- * This interface represents a feed item.
- * @package Benkle\Feeding\Interfaces
- */
-interface ItemInterface extends ChannelInterface
+
+use Benkle\Feeding\Interfaces\EnclosureInterface;
+
+trait WithEnclosuresTrait
 {
+    private $enclosures = [];
+
     /**
      * Add an enclosure to the item.
      * @param EnclosureInterface $enclosure
      * @return $this
      */
-    public function addEnclosure(EnclosureInterface $enclosure);
+    public function addEnclosure(EnclosureInterface $enclosure)
+    {
+        $this->enclosures[] = $enclosure;
+        return $this;
+    }
 
     /**
      * Remove an enclosure from the feed.
      * @param EnclosureInterface $enclosure
      * @return $this
      */
-    public function removeEnclosure(EnclosureInterface $enclosure);
+    public function removeEnclosure(EnclosureInterface $enclosure)
+    {
+        foreach ($this->enclosures as $i => $itemEnclosure) {
+            if ($itemEnclosure == $enclosure) {
+                unset($this->enclosures[$i]);
+            }
+        }
+        $this->enclosures = array_values($this->enclosures);
+        return $this;
+    }
 
     /**
      * Get all enclosures.
      * @return EnclosureInterface[]
      */
-    public function getEnclosures();
+    public function getEnclosures()
+    {
+        return $this->enclosures;
+    }
+
 }

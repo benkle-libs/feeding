@@ -21,14 +21,20 @@ namespace Benkle\Feeding\Standards\Atom;
 
 use Benkle\Feeding\Interfaces\ItemInterface;
 use Benkle\Feeding\Traits\WithDescriptionTrait;
+use Benkle\Feeding\Traits\WithEnclosuresTrait;
 use Benkle\Feeding\Traits\WithLastModifiedTrait;
 use Benkle\Feeding\Traits\WithPublicIdTrait;
 use Benkle\Feeding\Traits\WithRelationsTrait;
 use Benkle\Feeding\Traits\WithTitleTrait;
 
+/**
+ * Class FeedItem
+ * This class contains special mapping for Link.
+ * @package Benkle\Feeding\Standards\Atom
+ */
 class FeedItem implements ItemInterface, \JsonSerializable
 {
-    use WithPublicIdTrait, WithLastModifiedTrait, WithDescriptionTrait, WithTitleTrait, WithRelationsTrait;
+    use WithPublicIdTrait, WithLastModifiedTrait, WithDescriptionTrait, WithTitleTrait, WithRelationsTrait, WithEnclosuresTrait;
 
     /**
      * Specify data which should be serialized to JSON
@@ -46,6 +52,7 @@ class FeedItem implements ItemInterface, \JsonSerializable
             'publicId'     => $this->getPublicId(),
             'link'         => $this->getLink(),
             'relations'    => $this->getRelations(),
+            'enclosures'   => $this->getEnclosures(),
         ];
     }
 

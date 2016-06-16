@@ -19,18 +19,14 @@
 namespace Benkle\Feeding\Standards\Atom\Rules;
 
 
-use Benkle\Feeding\Interfaces\ChannelInterface;
+use Benkle\Feeding\Enclosure;
+use Benkle\Feeding\Interfaces\ItemInterface;
 use Benkle\Feeding\Interfaces\NodeInterface;
 use Benkle\Feeding\Interfaces\RuleInterface;
 use Benkle\Feeding\Parser;
 use Benkle\Feeding\Standards\Atom\Atom10Standard;
 
-/**
- * Class RelationsLinkRule
- * Rule for atom relation links.
- * @package Benkle\Feeding\Standards\Atom\Rules
- */
-class RelationsLinkRule implements RuleInterface
+class EnclosureLinkRule implements RuleInterface
 {
 
     /**
@@ -44,7 +40,8 @@ class RelationsLinkRule implements RuleInterface
         return
             strtolower($node->localName) == 'link' &&
             $node->namespaceURI == Atom10Standard::NAMESPACE_URI &&
-            $target instanceof ChannelInterface;
+            strtolower($node->attributes->getNamedItem('rel')->nodeValue) == 'enclosure' &&
+            $target instanceof ItemInterface;
     }
 
     /**
@@ -56,9 +53,17 @@ class RelationsLinkRule implements RuleInterface
      */
     public function handle(Parser $parser, \DOMNode $node, NodeInterface $target)
     {
-        $relation = $node->attributes->getNamedItem('rel')->nodeValue;
-        $link = $node->attributes->getNamedItem('href')->nodeValue;
-        /** @var ChannelInterface $target */
-        $target->setRelation($relation, $link);
+        $url = $node->attributes->getNamedItem('href')->nodeValue;
+        $type = $node->attributes->getNamedItem('type')->nodeValue;
+        $length = intval($node->attributes->getNamedItem('length')->nodeValue, 10);
+        $title = $node->attributes->getNamedItem('title') ? $node->attributes->getNamedItem('title')->nodeValue : basename($url);
+        $enclosure = new Enclosure();
+        $enclosure
+            ->setType($type)
+            ->setLength($length)
+            ->setTitle($title)
+            ->setUrl($url);
+        /** @var ItemInterface $target */
+        $target->addEnclosure($enclosure);
     }
 }

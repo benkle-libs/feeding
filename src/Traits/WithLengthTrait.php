@@ -16,32 +16,31 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\Feeding\Interfaces;
+namespace Benkle\Feeding\Traits;
 
-/**
- * Interface ItemInterface
- * This interface represents a feed item.
- * @package Benkle\Feeding\Interfaces
- */
-interface ItemInterface extends ChannelInterface
+
+trait WithLengthTrait
 {
-    /**
-     * Add an enclosure to the item.
-     * @param EnclosureInterface $enclosure
-     * @return $this
-     */
-    public function addEnclosure(EnclosureInterface $enclosure);
+    private $length = 0;
 
     /**
-     * Remove an enclosure from the feed.
-     * @param EnclosureInterface $enclosure
-     * @return $this
+     * Get the enclosure length.
+     * @return int
      */
-    public function removeEnclosure(EnclosureInterface $enclosure);
+    public function getLength()
+    {
+        return $this->length;
+    }
 
     /**
-     * Get all enclosures.
-     * @return EnclosureInterface[]
+     * Set the enclosure length.
+     * @param int $length
+     * @return $this
      */
-    public function getEnclosures();
+    public function setLength($length)
+    {
+        $this->length = $length;
+        return $this;
+    }
+
 }

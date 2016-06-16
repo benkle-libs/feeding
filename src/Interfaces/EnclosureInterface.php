@@ -19,29 +19,62 @@
 namespace Benkle\Feeding\Interfaces;
 
 /**
- * Interface ItemInterface
- * This interface represents a feed item.
+ * Interface EnclosureInterface
+ * This interface represents an enclosure (you know, for podcasts...)
  * @package Benkle\Feeding\Interfaces
  */
-interface ItemInterface extends ChannelInterface
+interface EnclosureInterface extends NodeInterface
 {
     /**
-     * Add an enclosure to the item.
-     * @param EnclosureInterface $enclosure
-     * @return $this
+     * Get the enclosure url.
+     * @return string
      */
-    public function addEnclosure(EnclosureInterface $enclosure);
+    public function getUrl();
 
     /**
-     * Remove an enclosure from the feed.
-     * @param EnclosureInterface $enclosure
+     * Set the enclosure url.
+     * @param string $url
      * @return $this
      */
-    public function removeEnclosure(EnclosureInterface $enclosure);
+    public function setUrl($url);
 
     /**
-     * Get all enclosures.
-     * @return EnclosureInterface[]
+     * Get the enclosure mimetype.
+     * @return string
      */
-    public function getEnclosures();
+    public function getType();
+
+    /**
+     * Set the enclosure mimetype.
+     * @param string $type
+     * @return $this
+     */
+    public function setType($type);
+
+    /**
+     * Get the enclosure title.
+     * @return string
+     */
+    public function getTitle();
+
+    /**
+     * Set the enclosure title.
+     * @param string $title
+     * @return $this
+     */
+    public function setTitle($title);
+
+    /**
+     * Get the enclosure length.
+     * @return int
+     */
+    public function getLength();
+
+    /**
+     * Set the enclosure length.
+     * @param int $length
+     * @return $this
+     */
+    public function setLength($length);
+
 }

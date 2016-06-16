@@ -24,6 +24,7 @@ use Benkle\Feeding\Interfaces\FeedInterface;
 use Benkle\Feeding\Interfaces\StandardInterface;
 use Benkle\Feeding\Standards\Atom\Rules\RelationsLinkRule;
 use Benkle\Feeding\Standards\RSS\Rules\ChannelRule;
+use Benkle\Feeding\Standards\RSS\Rules\EnclosureRule;
 use Benkle\Feeding\Standards\RSS\Rules\ItemRule;
 use Benkle\Feeding\Standards\RSS\Rules\LastBuildDateRule;
 use Benkle\Feeding\Standards\RSS\Rules\LinkRule;
@@ -61,6 +62,7 @@ class RSS09Standard implements StandardInterface
              ->add(new SimpleRSSFieldRule('title', 'setTitle'), 25)
              ->add(new LinkRule(), 10)
              ->add(new LastBuildDateRule(), 10)
+             ->add(new EnclosureRule(), 10)
              ->add(new RelationsLinkRule(), 15)
              ->add(new SimpleRSSFieldRule('description', 'setDescription'), 25)
              ->add(new ItemRule(), 50)

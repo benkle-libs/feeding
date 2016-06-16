@@ -16,32 +16,37 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\Feeding\Interfaces;
+namespace Benkle\Feeding;
+
+
+use Benkle\Feeding\Interfaces\EnclosureInterface;
+use Benkle\Feeding\Traits\WithLengthTrait;
+use Benkle\Feeding\Traits\WithTitleTrait;
+use Benkle\Feeding\Traits\WithTypeTrait;
+use Benkle\Feeding\Traits\WithUrlTrait;
 
 /**
- * Interface ItemInterface
- * This interface represents a feed item.
- * @package Benkle\Feeding\Interfaces
+ * Class Enclosure
+ * @package Benkle\Feeding
  */
-interface ItemInterface extends ChannelInterface
+class Enclosure implements EnclosureInterface, \JsonSerializable
 {
-    /**
-     * Add an enclosure to the item.
-     * @param EnclosureInterface $enclosure
-     * @return $this
-     */
-    public function addEnclosure(EnclosureInterface $enclosure);
+    use WithUrlTrait, WithTitleTrait, WithTypeTrait, WithLengthTrait;
 
     /**
-     * Remove an enclosure from the feed.
-     * @param EnclosureInterface $enclosure
-     * @return $this
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     * @since 5.4.0
      */
-    public function removeEnclosure(EnclosureInterface $enclosure);
-
-    /**
-     * Get all enclosures.
-     * @return EnclosureInterface[]
-     */
-    public function getEnclosures();
+    function jsonSerialize()
+    {
+        return [
+            'url'    => $this->getUrl(),
+            'title'  => $this->getTitle(),
+            'type'   => $this->getType(),
+            'length' => $this->getLength(),
+        ];
+    }
 }
