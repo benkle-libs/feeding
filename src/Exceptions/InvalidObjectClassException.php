@@ -16,47 +16,46 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\Feeding\Traits;
+namespace Benkle\Feeding\Exceptions;
 
-
-use Benkle\Feeding\Exceptions\RelationNotFoundException;
-
-trait WithRelationsTrait
+/**
+ * Class InvalidObjectClassException
+ * Gets thrown when a priority list is feed the wrong class.
+ * @package Benkle\Feeding\Exceptions
+ */
+class InvalidObjectClassException extends Exception
 {
-    private $relations = [];
+    private $rightClass = '';
+    private $wrongClass = '';
 
     /**
-     * Get a relation link.
-     * @param string $relation
+     * InvalidObjectClassException constructor.
+     * @param string $rightClass
+     * @param string $wrongClass
+     */
+    public function __construct($rightClass, $wrongClass)
+    {
+        parent::__construct(sprintf('List was limited to "%s", but was given a "%s"', $rightClass, $wrongClass), -77);
+        $this->rightClass = $rightClass;
+        $this->wrongClass = $wrongClass;
+    }
+
+    /**
+     * Get the class name of the expected class.
      * @return string
      */
-    public function getRelation($relation)
+    public function getRightClass()
     {
-        if (!isset($this->relations[$relation])) {
-            throw new RelationNotFoundException($relation);
-        }
-        return $this->relations[$relation];
+        return $this->rightClass;
     }
 
     /**
-     * Get all relations.
-     * @return string[]
+     * Get the class name of the class that was feed in.
+     * @return string
      */
-    public function getRelations()
+    public function getWrongClass()
     {
-        return $this->relations;
-    }
-
-    /**
-     * Set a relation link.
-     * @param string $relation
-     * @param string $link
-     * @return $this
-     */
-    public function setRelation($relation, $link)
-    {
-        $this->relations[$relation] = $link;
-        return $this;
+        return $this->wrongClass;
     }
 
 }

@@ -16,47 +16,47 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\Feeding\Traits;
+namespace Benkle\Feeding\Exceptions;
 
-
-use Benkle\Feeding\Exceptions\RelationNotFoundException;
-
-trait WithRelationsTrait
+/**
+ * Class InvalidNumberOfRootTagsException
+ * Gets thrown when the number of root tags in a feed is of.
+ * @package Benkle\Feeding\Exceptions
+ */
+class InvalidNumberOfRootTagsException extends Exception
 {
-    private $relations = [];
+    private $tagName = '';
+    private $count   = 0;
 
     /**
-     * Get a relation link.
-     * @param string $relation
+     * InvalidNumberOfRootTagsException constructor.
+     * @param string $tagName
+     * @param int $count
+     */
+    public function __construct($tagName, $count)
+    {
+        parent::__construct(sprintf('Invalid number of <%s> tags: %d', $tagName, $count));
+        $this->tagName = $tagName;
+        $this->count = $count;
+    }
+
+    /**
+     * tag name of the root tag.
      * @return string
      */
-    public function getRelation($relation)
+    public function getTagName()
     {
-        if (!isset($this->relations[$relation])) {
-            throw new RelationNotFoundException($relation);
-        }
-        return $this->relations[$relation];
+        return $this->tagName;
     }
 
     /**
-     * Get all relations.
-     * @return string[]
+     * Number of root tags found.
+     * @return int
      */
-    public function getRelations()
+    public function getCount()
     {
-        return $this->relations;
+        return $this->count;
     }
 
-    /**
-     * Set a relation link.
-     * @param string $relation
-     * @param string $link
-     * @return $this
-     */
-    public function setRelation($relation, $link)
-    {
-        $this->relations[$relation] = $link;
-        return $this;
-    }
 
 }

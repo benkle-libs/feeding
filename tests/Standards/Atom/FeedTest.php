@@ -190,8 +190,8 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Exception
-     * @expectedExceptionMessage Relation 'test' not found
+     * @expectedException \Benkle\Feeding\Exceptions\RelationNotFoundException
+     * @expectedExceptionMessage Relation "test" not found
      */
     public function testWithRelationsException()
     {

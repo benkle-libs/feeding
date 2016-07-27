@@ -20,7 +20,6 @@ namespace Benkle\Feeding;
 
 
 use Benkle\Feeding\Interfaces\DOMParserInterface;
-use Benkle\Feeding\Interfaces\FeedInterface;
 use Benkle\Feeding\Interfaces\FileAccessInterface;
 use Benkle\Feeding\Interfaces\StandardInterface;
 use GuzzleHttp\Client;
@@ -53,45 +52,8 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($fileAccess, $reader->getFileAccess());
     }
 
-    private function mockBasicReader(BareReader $reader)
-    {
-        $parser = $this->getMock(DOMParserInterface::class);
-        $parser
-            ->expects($this->exactly(1))
-            ->method('parse')
-            ->with('test')
-            ->willReturn(new \DOMDocument());
-        $reader->setDomParser($parser);
-
-        $standard = $this->getMock(StandardInterface::class);
-        $standard
-            ->expects($this->atLeast(1))
-            ->method('canHandle')
-            ->willReturn(false);
-        $reader->getStandards()->add($standard, 10);
-
-        $parser = $this
-            ->getMockBuilder(Parser::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $parser
-            ->expects($this->exactly(1))
-            ->method('parse')
-            ->willReturn('test');
-        $standard = $this->getMock(StandardInterface::class);
-        $standard
-            ->expects($this->atLeast(1))
-            ->method('canHandle')
-            ->willReturn(true);
-        $standard
-            ->expects($this->exactly(1))
-            ->method('getParser')
-            ->willReturn($parser);
-        $reader->getStandards()->add($standard, 10);
-    }
-
     /**
-     * @expectedException \Exception
+     * @expectedException \Benkle\Feeding\Exceptions\FileNotFoundException
      * @expectedExceptionMessage File "test" not found
      */
     public function testReadFromNonexistingFile()
@@ -214,6 +176,43 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $reader->setFileAccess($fileAccess);
 
         $this->assertEquals('test', $reader->read('test'));
+    }
+
+    private function mockBasicReader(BareReader $reader)
+    {
+        $parser = $this->getMock(DOMParserInterface::class);
+        $parser
+            ->expects($this->exactly(1))
+            ->method('parse')
+            ->with('test')
+            ->willReturn(new \DOMDocument());
+        $reader->setDomParser($parser);
+
+        $standard = $this->getMock(StandardInterface::class);
+        $standard
+            ->expects($this->atLeast(1))
+            ->method('canHandle')
+            ->willReturn(false);
+        $reader->getStandards()->add($standard, 10);
+
+        $parser = $this
+            ->getMockBuilder(Parser::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $parser
+            ->expects($this->exactly(1))
+            ->method('parse')
+            ->willReturn('test');
+        $standard = $this->getMock(StandardInterface::class);
+        $standard
+            ->expects($this->atLeast(1))
+            ->method('canHandle')
+            ->willReturn(true);
+        $standard
+            ->expects($this->exactly(1))
+            ->method('getParser')
+            ->willReturn($parser);
+        $reader->getStandards()->add($standard, 10);
     }
 
 }

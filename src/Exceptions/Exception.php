@@ -16,47 +16,13 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\Feeding\Traits;
+namespace Benkle\Feeding\Exceptions;
 
-
-use Benkle\Feeding\Exceptions\RelationNotFoundException;
-
-trait WithRelationsTrait
+/**
+ * Class Exception
+ * Base class for our exceptions.
+ * @package Benkle\Feeding\Exceptions
+ */
+class Exception extends \Exception
 {
-    private $relations = [];
-
-    /**
-     * Get a relation link.
-     * @param string $relation
-     * @return string
-     */
-    public function getRelation($relation)
-    {
-        if (!isset($this->relations[$relation])) {
-            throw new RelationNotFoundException($relation);
-        }
-        return $this->relations[$relation];
-    }
-
-    /**
-     * Get all relations.
-     * @return string[]
-     */
-    public function getRelations()
-    {
-        return $this->relations;
-    }
-
-    /**
-     * Set a relation link.
-     * @param string $relation
-     * @param string $link
-     * @return $this
-     */
-    public function setRelation($relation, $link)
-    {
-        $this->relations[$relation] = $link;
-        return $this;
-    }
-
 }

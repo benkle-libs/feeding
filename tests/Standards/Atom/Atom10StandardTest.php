@@ -76,7 +76,7 @@ class Atom10StandardTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Exception
+     * @expectedException \Benkle\Feeding\Exceptions\InvalidNumberOfRootTagsException
      * @expectedExceptionMessage Invalid number of <feed> tags: 0
      */
     public function testFailWhenNoRootIsFound()
@@ -88,7 +88,7 @@ class Atom10StandardTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Exception
+     * @expectedException \Benkle\Feeding\Exceptions\InvalidNumberOfRootTagsException
      * @expectedExceptionMessage Invalid number of <feed> tags: 2
      */
     public function testFailWhenToManyRootsAreFound()

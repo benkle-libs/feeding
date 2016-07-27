@@ -17,6 +17,7 @@
  */
 
 namespace Benkle\Feeding\Utilities;
+use Benkle\Feeding\Exceptions\InvalidObjectClassException;
 
 /**
  * Class PriorityList
@@ -28,9 +29,9 @@ class PriorityList implements \Iterator
 {
     const DEFAULT_PRIORITY = 50;
 
-    private $entries    = [];
-    private $position   = 0;
-    private $sorted     = false;
+    private $entries = [];
+    private $position = 0;
+    private $sorted = false;
     /* This is for a little "safety", until we get Generics */
     private $entryClass = null;
 
@@ -53,7 +54,7 @@ class PriorityList implements \Iterator
     public function add($entry, $priority = self::DEFAULT_PRIORITY)
     {
         if (isset($this->entryClass) && !($entry instanceof $this->entryClass)) {
-            throw new \Exception(sprintf('List was limited to %s, but was given a %s', $this->entryClass, get_class($entry)));
+            throw new InvalidObjectClassException($this->entryClass, get_class($entry));
         }
         $this->entries[] = ['data' => $entry, 'priority' => $priority];
         $this->sorted = false;
@@ -189,6 +190,10 @@ class PriorityList implements \Iterator
         if (!$this->sorted) {
             $this->rewind();
         }
-        return array_map(function($entry) { return $entry['data']; }, $this->entries);
+        return array_map(
+            function ($entry) {
+                return $entry['data'];
+            }, $this->entries
+        );
     }
 }

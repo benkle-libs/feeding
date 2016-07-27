@@ -16,47 +16,21 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\Feeding\Traits;
+namespace Benkle\Feeding\Exceptions;
 
-
-use Benkle\Feeding\Exceptions\RelationNotFoundException;
-
-trait WithRelationsTrait
+/**
+ * Class UnknownFeedFormatException
+ * Gets thrown when we get a feed of unknown format.
+ * @package Benkle\Feeding\Exceptions
+ */
+class UnknownFeedFormatException extends Exception
 {
-    private $relations = [];
 
     /**
-     * Get a relation link.
-     * @param string $relation
-     * @return string
+     * UnknownFeedFormatException constructor.
      */
-    public function getRelation($relation)
+    public function __construct()
     {
-        if (!isset($this->relations[$relation])) {
-            throw new RelationNotFoundException($relation);
-        }
-        return $this->relations[$relation];
+        parent::__construct('Unknown feed format', -134);
     }
-
-    /**
-     * Get all relations.
-     * @return string[]
-     */
-    public function getRelations()
-    {
-        return $this->relations;
-    }
-
-    /**
-     * Set a relation link.
-     * @param string $relation
-     * @param string $link
-     * @return $this
-     */
-    public function setRelation($relation, $link)
-    {
-        $this->relations[$relation] = $link;
-        return $this;
-    }
-
 }

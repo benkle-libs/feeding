@@ -19,13 +19,13 @@
 namespace Benkle\Feeding\Standards\Atom;
 
 
+use Benkle\Feeding\Exceptions\InvalidNumberOfRootTagsException;
 use Benkle\Feeding\Interfaces\FeedInterface;
 use Benkle\Feeding\Interfaces\StandardInterface;
 use Benkle\Feeding\Standards\Atom\Rules\EnclosureLinkRule;
 use Benkle\Feeding\Standards\Atom\Rules\EntryRule;
 use Benkle\Feeding\Standards\Atom\Rules\RelationsLinkRule;
 use Benkle\Feeding\Standards\Atom\Rules\SimpleAtomFieldRule;
-use Benkle\Feeding\Standards\Atom\Rules\SingleLinkRule;
 use Benkle\Feeding\Standards\Atom\Rules\UpdatedRule;
 use Benkle\Feeding\Traits\WithParserTrait;
 use Benkle\Feeding\Traits\WithRuleSetTrait;
@@ -48,15 +48,14 @@ class Atom10Standard implements StandardInterface
     public function __construct()
     {
         $this->getRules()
-            ->add(new SimpleAtomFieldRule('id', 'setPublicId'), 10)
-            ->add(new SimpleAtomFieldRule('title', 'setTitle'), 10)
-            ->add(new SimpleAtomFieldRule('subtitle', 'setDescription'), 10)
-            ->add(new SimpleAtomFieldRule('summary', 'setDescription'), 10)
-            ->add(new UpdatedRule(), 10)
-            ->add(new EnclosureLinkRule(), 20)
-            ->add(new RelationsLinkRule(), 25)
-            ->add(new EntryRule(), 50)
-        ;
+             ->add(new SimpleAtomFieldRule('id', 'setPublicId'), 10)
+             ->add(new SimpleAtomFieldRule('title', 'setTitle'), 10)
+             ->add(new SimpleAtomFieldRule('subtitle', 'setDescription'), 10)
+             ->add(new SimpleAtomFieldRule('summary', 'setDescription'), 10)
+             ->add(new UpdatedRule(), 10)
+             ->add(new EnclosureLinkRule(), 20)
+             ->add(new RelationsLinkRule(), 25)
+             ->add(new EntryRule(), 50);
     }
 
     /**
@@ -76,7 +75,7 @@ class Atom10Standard implements StandardInterface
     {
         $rootNodes = $dom->getElementsByTagNameNS(self::NAMESPACE_URI, 'feed');
         if ($rootNodes->length != 1) {
-            Throw new \Exception('Invalid number of <feed> tags: ' . $rootNodes->length);
+            Throw new InvalidNumberOfRootTagsException('feed', $rootNodes->length);
         }
         return $rootNodes->item(0);
     }

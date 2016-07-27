@@ -16,47 +16,34 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\Feeding\Traits;
+namespace Benkle\Feeding\Exceptions;
 
-
-use Benkle\Feeding\Exceptions\RelationNotFoundException;
-
-trait WithRelationsTrait
+/**
+ * Class RelationNotFoundException
+ * Gets thrown when a link relation is missing.
+ * @package Benkle\Feeding\Exceptions
+ */
+class RelationNotFoundException extends Exception
 {
-    private $relations = [];
+    private $relation = '';
 
     /**
-     * Get a relation link.
+     * RelationNotFoundException constructor.
      * @param string $relation
+     */
+    public function __construct($relation)
+    {
+        parent::__construct(sprintf('Relation "%s" not found', $relation), -37);
+        $this->relation = $relation;
+    }
+
+    /**
+     * Name of the missing relation.
      * @return string
      */
-    public function getRelation($relation)
+    public function getRelation()
     {
-        if (!isset($this->relations[$relation])) {
-            throw new RelationNotFoundException($relation);
-        }
-        return $this->relations[$relation];
-    }
-
-    /**
-     * Get all relations.
-     * @return string[]
-     */
-    public function getRelations()
-    {
-        return $this->relations;
-    }
-
-    /**
-     * Set a relation link.
-     * @param string $relation
-     * @param string $link
-     * @return $this
-     */
-    public function setRelation($relation, $link)
-    {
-        $this->relations[$relation] = $link;
-        return $this;
+        return $this->relation;
     }
 
 }

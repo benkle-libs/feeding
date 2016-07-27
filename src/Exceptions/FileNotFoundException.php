@@ -16,47 +16,34 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace Benkle\Feeding\Traits;
+namespace Benkle\Feeding\Exceptions;
 
-
-use Benkle\Feeding\Exceptions\RelationNotFoundException;
-
-trait WithRelationsTrait
+/**
+ * Class FileNotFoundException
+ * Gets throw when a file was not found.
+ * @package Benkle\Feeding\Exceptions
+ */
+class FileNotFoundException extends Exception
 {
-    private $relations = [];
+    private $path = '';
 
     /**
-     * Get a relation link.
-     * @param string $relation
+     * FileNotFoundException constructor.
+     * @param string $path
+     */
+    public function __construct($path)
+    {
+        parent::__construct(sprintf('File "%s" not found', $path), -133);
+        $this->path = $path;
+    }
+
+    /**
+     * Get the path of the missing file.
      * @return string
      */
-    public function getRelation($relation)
+    public function getPath()
     {
-        if (!isset($this->relations[$relation])) {
-            throw new RelationNotFoundException($relation);
-        }
-        return $this->relations[$relation];
-    }
-
-    /**
-     * Get all relations.
-     * @return string[]
-     */
-    public function getRelations()
-    {
-        return $this->relations;
-    }
-
-    /**
-     * Set a relation link.
-     * @param string $relation
-     * @param string $link
-     * @return $this
-     */
-    public function setRelation($relation, $link)
-    {
-        $this->relations[$relation] = $link;
-        return $this;
+        return $this->path;
     }
 
 }

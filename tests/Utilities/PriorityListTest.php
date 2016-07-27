@@ -204,7 +204,8 @@ class PriorityListTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Exception
+     * @expectedException \Benkle\Feeding\Exceptions\InvalidObjectClassException
+     * @expectedExceptionMessage List was limited to "stdClass", but was given a "Benkle\Feeding\Utilities\PriorityList"
      */
     public function testObjectSafety()
     {

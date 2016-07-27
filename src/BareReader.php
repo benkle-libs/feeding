@@ -19,6 +19,7 @@
 namespace Benkle\Feeding;
 
 
+use Benkle\Feeding\Exceptions\UnknownFeedFormatException;
 use Benkle\Feeding\Interfaces\DOMParserInterface;
 use Benkle\Feeding\Interfaces\StandardInterface;
 use Benkle\Feeding\Utilities\PriorityList;
@@ -87,7 +88,7 @@ class BareReader
                 return $standard->getParser()->parse($dom);
             }
         }
-        throw new \Exception('Unknown feed format');
+        throw new UnknownFeedFormatException();
     }
 
 }

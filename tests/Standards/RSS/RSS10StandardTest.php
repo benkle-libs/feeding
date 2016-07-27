@@ -56,7 +56,7 @@ class RSS10StandardTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Exception
+     * @expectedException \Benkle\Feeding\Exceptions\InvalidNumberOfRootTagsException
      * @expectedExceptionMessage Invalid number of <RDF> tags: 0
      */
     public function testFailWhenNoRootIsFound()
@@ -68,7 +68,7 @@ class RSS10StandardTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Exception
+     * @expectedException \Benkle\Feeding\Exceptions\InvalidNumberOfRootTagsException
      * @expectedExceptionMessage Invalid number of <RDF> tags: 2
      */
     public function testFailWhenToManyRootsAreFound()

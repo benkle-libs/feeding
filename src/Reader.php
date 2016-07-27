@@ -22,6 +22,7 @@ namespace Benkle\Feeding;
 use Benkle\Feeding\DOMParsers\FallbackStackParser;
 use Benkle\Feeding\DOMParsers\MastermindsHTML5Parser;
 use Benkle\Feeding\DOMParsers\PHPDOMParser;
+use Benkle\Feeding\Exceptions\FileNotFoundException;
 use Benkle\Feeding\FileAccess\BasicFileAccess;
 use Benkle\Feeding\Interfaces\FileAccessInterface;
 use Benkle\Feeding\Standards\Atom\Atom10Standard;
@@ -59,11 +60,10 @@ class Reader extends BareReader
                 )
             )
             ->getStandards()
-                ->add(new RSS09Standard())
-                ->add(new RSS10Standard())
-                ->add(new RSS20Standard())
-                ->add(new Atom10Standard())
-        ;
+            ->add(new RSS09Standard())
+            ->add(new RSS10Standard())
+            ->add(new RSS20Standard())
+            ->add(new Atom10Standard());
     }
 
     /**
@@ -115,7 +115,7 @@ class Reader extends BareReader
     public function readFromFile($filename)
     {
         if (!$this->getFileAccess()->exists($filename)) {
-            throw new \Exception(sprintf('File "%s" not found', $filename));
+            throw new FileNotFoundException($filename);
         }
         return parent::read($this->getFileAccess()->get($filename));
     }

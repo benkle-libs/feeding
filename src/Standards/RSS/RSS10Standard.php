@@ -18,6 +18,8 @@
 
 namespace Benkle\Feeding\Standards\RSS;
 
+use Benkle\Feeding\Exceptions\InvalidNumberOfRootTagsException;
+
 /**
  * Class RSS10Standard
  * Standard for handling RSS 1.0
@@ -35,7 +37,7 @@ class RSS10Standard extends RSS09Standard
     {
         $rootNodes = $dom->getElementsByTagNameNS(self::NAMESPACE_URI, 'RDF');
         if ($rootNodes->length != 1) {
-            Throw new \Exception('Invalid number of <RDF> tags: ' . $rootNodes->length);
+            Throw new InvalidNumberOfRootTagsException('RDF', $rootNodes->length);
         }
         return $rootNodes->item(0);
     }

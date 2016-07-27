@@ -19,6 +19,7 @@
 namespace Benkle\Feeding\Standards\RSS;
 
 
+use Benkle\Feeding\Exceptions\InvalidNumberOfRootTagsException;
 use Benkle\Feeding\Feed;
 use Benkle\Feeding\Interfaces\FeedInterface;
 use Benkle\Feeding\Interfaces\StandardInterface;
@@ -42,15 +43,6 @@ class RSS09Standard implements StandardInterface
 {
 
     use WithParserTrait, WithRuleSetTrait;
-
-    /**
-     * Get the pattern for matching RSS versions.
-     * @return string
-     */
-    protected function getVersionPattern()
-    {
-        return '0.9*';
-    }
 
     /**
      * RSS09Standard constructor.
@@ -86,7 +78,7 @@ class RSS09Standard implements StandardInterface
     {
         $rootNodes = $dom->getElementsByTagName('rss');
         if ($rootNodes->length != 1) {
-            Throw new \Exception('Invalid number of <rss> tags: ' . $rootNodes->length);
+            Throw new InvalidNumberOfRootTagsException('rss', $rootNodes->length);
         }
         return $rootNodes->item(0);
     }
@@ -105,6 +97,15 @@ class RSS09Standard implements StandardInterface
             $result = $version && fnmatch($this->getVersionPattern(), $version->nodeValue);
         }
         return $result;
+    }
+
+    /**
+     * Get the pattern for matching RSS versions.
+     * @return string
+     */
+    protected function getVersionPattern()
+    {
+        return '0.9*';
     }
 
 }

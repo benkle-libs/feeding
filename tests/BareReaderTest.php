@@ -47,7 +47,7 @@ class BareReaderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Exception
+     * @expectedException \Benkle\Feeding\Exceptions\UnknownFeedFormatException
      * @expectedExceptionMessage Unknown feed format
      */
     public function testReadWithoutStandards()
