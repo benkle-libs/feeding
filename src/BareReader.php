@@ -78,6 +78,7 @@ class BareReader
     /**
      * Turn a source string into a feed object.
      * @param $source
+     * @throws UnknownFeedFormatException
      */
     public function read($source)
     {

@@ -23,6 +23,7 @@ use Benkle\Feeding\DOMParsers\FallbackStackParser;
 use Benkle\Feeding\DOMParsers\MastermindsHTML5Parser;
 use Benkle\Feeding\DOMParsers\PHPDOMParser;
 use Benkle\Feeding\Exceptions\FileNotFoundException;
+use Benkle\Feeding\Exceptions\UnknownFeedFormatException;
 use Benkle\Feeding\FileAccess\BasicFileAccess;
 use Benkle\Feeding\Interfaces\FileAccessInterface;
 use Benkle\Feeding\Standards\Atom\Atom10Standard;
@@ -110,7 +111,8 @@ class Reader extends BareReader
      * Read a feed from a file.
      * @param string $filename
      * @return Interfaces\FeedInterface
-     * @throws \Exception
+     * @throws FileNotFoundException
+     * @throws UnknownFeedFormatException
      */
     public function readFromFile($filename)
     {
@@ -124,7 +126,7 @@ class Reader extends BareReader
      * Read a feed from a remote address.
      * @param string $url
      * @return Interfaces\FeedInterface
-     * @throws \Exception
+     * @throws UnknownFeedFormatException
      */
     public function readFromRemote($url)
     {
@@ -136,7 +138,7 @@ class Reader extends BareReader
      * Read a feed from either a remote address, a file or the source.
      * @param string $feed
      * @return Interfaces\FeedInterface
-     * @throws \Exception
+     * @throws UnknownFeedFormatException
      */
     public function read($feed)
     {

@@ -33,6 +33,7 @@ class PHPDOMParser implements DOMParserInterface
      * Parse a string into a DOMDocument.
      * @param $source
      * @return \DOMDocument
+     * @throws \DOMException
      */
     public function parse($source)
     {

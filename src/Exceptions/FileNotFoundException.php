@@ -20,7 +20,7 @@ namespace Benkle\Feeding\Exceptions;
 
 /**
  * Class FileNotFoundException
- * Gets throw when a file was not found.
+ * Gets thrown when a file was not found.
  * @package Benkle\Feeding\Exceptions
  */
 class FileNotFoundException extends Exception

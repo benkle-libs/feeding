@@ -50,6 +50,7 @@ class PriorityList implements \Iterator
      * @param mixed $entry
      * @param int $priority
      * @return $this
+     * @throws InvalidObjectClassException
      */
     public function add($entry, $priority = self::DEFAULT_PRIORITY)
     {

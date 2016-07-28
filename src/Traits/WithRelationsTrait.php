@@ -29,6 +29,7 @@ trait WithRelationsTrait
      * Get a relation link.
      * @param string $relation
      * @return string
+     * @throws RelationNotFoundException
      */
     public function getRelation($relation)
     {

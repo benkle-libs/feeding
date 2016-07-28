@@ -19,6 +19,7 @@
 namespace Benkle\Feeding\Interfaces;
 
 
+use Benkle\Feeding\Exceptions\InvalidNumberOfRootTagsException;
 use Benkle\Feeding\Parser;
 use Benkle\Feeding\Utilities\PriorityList;
 
@@ -44,6 +45,7 @@ interface StandardInterface
     /**
      * Get the feed root from a dom document.
      * @return \DOMNode
+     * @throws InvalidNumberOfRootTagsException
      */
     public function getRootNode(\DOMDocument $dom);
 

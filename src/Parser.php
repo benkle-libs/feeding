@@ -19,6 +19,7 @@
 namespace Benkle\Feeding;
 
 
+use Benkle\Feeding\Exceptions\InvalidNumberOfRootTagsException;
 use Benkle\Feeding\Interfaces\FeedInterface;
 use Benkle\Feeding\Interfaces\NodeInterface;
 use Benkle\Feeding\Interfaces\RuleInterface;
@@ -57,6 +58,7 @@ class Parser
      * Turn a dom document into a feed object.
      * @param \DOMDocument $dom
      * @return FeedInterface
+     * @throws InvalidNumberOfRootTagsException
      */
     public function parse(\DOMDocument $dom)
     {

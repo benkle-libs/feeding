@@ -70,6 +70,7 @@ class Atom10Standard implements StandardInterface
     /**
      * Get the feed root from a dom document.
      * @return \DOMNode
+     * @throws InvalidNumberOfRootTagsException
      */
     public function getRootNode(\DOMDocument $dom)
     {

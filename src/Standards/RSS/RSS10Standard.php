@@ -32,6 +32,7 @@ class RSS10Standard extends RSS09Standard
     /**
      * Get the feed root from a dom document.
      * @return \DOMNode
+     * @throws InvalidNumberOfRootTagsException
      */
     public function getRootNode(\DOMDocument $dom)
     {

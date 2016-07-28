@@ -17,6 +17,7 @@
  */
 
 namespace Benkle\Feeding\Interfaces;
+use Benkle\Feeding\Exceptions\RelationNotFoundException;
 
 /**
  * Interface ChannelInterface
@@ -94,6 +95,7 @@ interface ChannelInterface extends NodeInterface
      * Get a relation link.
      * @param string $relation
      * @return string
+     * @throws RelationNotFoundException
      */
     public function getRelation($relation);
 
